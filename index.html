@@ -16,1457 +16,808 @@
                             <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cholecalciferol Toxicology — Veterinary Medicine</title>
-<meta name="description" content="An interactive veterinary toxicology module on cholecalciferol (Vitamin D3) toxicosis in dogs and cats. Covers mechanism, clinical signs, diagnosis, differential diagnosis, and treatment.">
-<style>
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --white:        #ffffff;
-    --sage:         #cbd2c8;
-    --teal:         #66b2b2;
-    --teal-dark:    #3d8a8a;
-    --teal-darker:  #2a6666;
-    --teal-light:   #e8f4f4;
-    --teal-mid:     #c2dede;
-    --sage-light:   #f0f2ef;
-    --sage-mid:     #e2e6e0;
-    --sage-dark:    #7a8878;
-    --text-dark:    #1a2e2e;
-    --text-mid:     #3d5452;
-    --text-light:   #607472;
-    --amber:        #c47d10;
-    --amber-light:  #fdf3e3;
-    --amber-border: #e8a020;
-    --amber-text:   #7a4d00;
-    --green-dark:   #1e6b45;
-    --green-light:  #eaf6ef;
-    --green-border: #52b788;
-    --green-text:   #1e6b45;
-    --red-dark:     #922b21;
-    --red-light:    #fdf0ef;
-    --red-border:   #e07070;
-    --red-text:     #7b2020;
-    --bg-page:      #f5f7f5;
-    --bg-card:      #ffffff;
-    --bg-deep:      #f0f4f4;
-    --border:       #dde3db;
-    --focus:        #66b2b2;
-    --nav-height:   60px;
-  }
-
-  /* ── Skip Link ── */
-  .skip-link {
-    position: absolute;
-    top: -100px;
-    left: 16px;
-    background: var(--teal-dark);
-    color: var(--white);
-    padding: 8px 16px;
-    border-radius: 0 0 8px 8px;
-    font-size: 13px;
-    font-weight: 700;
-    z-index: 9999;
-    transition: top 0.2s;
-    text-decoration: none;
-  }
-
-  .skip-link:focus { top: 0; }
-
-  /* ── Base ── */
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background: var(--bg-page);
-    color: var(--text-dark);
-    min-height: 100vh;
-  }
-
-  /* ── Top Nav ── */
-  .top-nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: var(--nav-height);
-    background: rgba(255,255,255,0.97);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 24px;
-    z-index: 500;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 1px 6px rgba(102,178,178,0.08);
-  }
-
-  .nav-brand {
-    font-size: 13px;
-    font-weight: 800;
-    color: var(--teal-darker);
-    letter-spacing: 0.04em;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .nav-brand-icon { font-size: 18px; }
-
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    list-style: none;
-  }
-
-  .nav-links a {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--text-light);
-    text-decoration: none;
-    padding: 6px 10px;
-    border-radius: 6px;
-    transition: all 0.2s;
-    white-space: nowrap;
-  }
-
-  .nav-links a:hover {
-    color: var(--teal-dark);
-    background: var(--teal-light);
-  }
-
-  .nav-links a:focus-visible {
-    outline: 2px solid var(--focus);
-    outline-offset: 2px;
-  }
-
-  .nav-hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 4px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 6px;
-    border-radius: 6px;
-  }
-
-  .nav-hamburger:focus-visible {
-    outline: 2px solid var(--focus);
-    outline-offset: 2px;
-  }
-
-  .nav-hamburger span {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background: var(--teal-dark);
-    border-radius: 2px;
-    transition: all 0.2s;
-  }
-
-  .mobile-menu {
-    display: none;
-    position: fixed;
-    top: var(--nav-height);
-    left: 0; right: 0;
-    background: var(--white);
-    border-bottom: 1px solid var(--border);
-    padding: 12px 16px;
-    z-index: 499;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  }
-
-  .mobile-menu.open { display: block; }
-
-  .mobile-menu a {
-    display: block;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-mid);
-    text-decoration: none;
-    padding: 10px 12px;
-    border-radius: 8px;
-    transition: all 0.15s;
-  }
-
-  .mobile-menu a:hover { background: var(--teal-light); color: var(--teal-dark); }
-
-  /* ── Page Layout ── */
-  .page-wrap {
-    padding-top: var(--nav-height);
-  }
-
-  .section {
-    padding: 56px 24px;
-    max-width: 860px;
-    margin: 0 auto;
-  }
-
-  .section + .section {
-    border-top: 1px solid var(--border);
-  }
-
-  /* ── Section Label ── */
-  .section-tag {
-    display: inline-block;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--teal-dark);
-    background: var(--teal-light);
-    border: 1px solid var(--teal-mid);
-    padding: 3px 12px;
-    border-radius: 4px;
-    margin-bottom: 12px;
-  }
-
-  .section-title {
-    font-size: clamp(20px, 3.5vw, 28px);
-    font-weight: 800;
-    color: var(--text-dark);
-    line-height: 1.2;
-    margin-bottom: 8px;
-  }
-
-  .section-lead {
-    font-size: 15px;
-    color: var(--text-light);
-    line-height: 1.65;
-    max-width: 640px;
-    margin-bottom: 28px;
-  }
-
-  .col-label {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--teal-dark);
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .col-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--teal-mid);
-  }
-
-  /* ── Hero Section ── */
-  #hero {
-    background: linear-gradient(135deg, var(--teal-light) 0%, #d4eded 50%, var(--sage-light) 100%);
-    border-bottom: 1px solid var(--teal-mid);
-    padding: 64px 24px 56px;
-  }
-
-  .hero-inner {
-    max-width: 860px;
-    margin: 0 auto;
-  }
-
-  .hero-tag {
-    display: inline-block;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--teal-dark);
-    background: rgba(255,255,255,0.7);
-    border: 1px solid var(--teal-mid);
-    padding: 3px 12px;
-    border-radius: 4px;
-    margin-bottom: 16px;
-  }
-
-  .hero-title {
-    font-size: clamp(24px, 4vw, 36px);
-    font-weight: 800;
-    color: var(--text-dark);
-    line-height: 1.2;
-    margin-bottom: 12px;
-    max-width: 700px;
-  }
-
-  .hero-sub {
-    font-size: 15px;
-    color: var(--text-mid);
-    line-height: 1.65;
-    max-width: 580px;
-    margin-bottom: 28px;
-  }
-
-  .hero-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 28px;
-  }
-
-  .hero-chip {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 30px;
-    padding: 6px 14px;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--text-mid);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
-  }
-
-  .hero-chip-icon { font-size: 14px; }
-
-  .hero-patient {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 18px 22px;
-    max-width: 560px;
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-    box-shadow: 0 2px 8px rgba(102,178,178,0.1);
-  }
-
-  .hero-patient-icon { font-size: 40px; flex-shrink: 0; }
-
-  .hero-patient-name {
-    font-size: 13px;
-    font-weight: 800;
-    color: var(--teal-darker);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-bottom: 4px;
-  }
-
-  .hero-patient-desc {
-    font-size: 13px;
-    color: var(--text-mid);
-    line-height: 1.55;
-    margin-bottom: 10px;
-  }
-
-  .hero-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-
-  .badge {
-    font-size: 11px;
-    font-weight: 700;
-    padding: 3px 10px;
-    border-radius: 4px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .badge-red   { background: var(--red-light);   border: 1px solid var(--red-border);   color: var(--red-dark); }
-  .badge-amber { background: var(--amber-light);  border: 1px solid var(--amber-border); color: var(--amber-text); }
-  .badge-teal  { background: var(--teal-light);   border: 1px solid var(--teal-mid);     color: var(--teal-darker); }
-
-  /* ── Disclaimer Banner ── */
-  .disclaimer {
-    background: var(--amber-light);
-    border: 1px solid var(--amber-border);
-    border-left: 4px solid var(--amber-border);
-    border-radius: 0 10px 10px 0;
-    padding: 14px 18px;
-    margin: 0 auto 0;
-    max-width: 860px;
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    font-size: 13px;
-    color: var(--amber);
-    line-height: 1.6;
-  }
-
-  .disclaimer-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
-  .disclaimer strong { color: var(--amber-text); }
-
-  /* ── 2x2 Flip Grid ── */
-  .flip-grid-2x2 {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-    margin-bottom: 24px;
-  }
-
-  .flip-card {
-    perspective: 900px;
-    height: 196px;
-    cursor: pointer;
-  }
-
-  .flip-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    transition: transform 0.55s cubic-bezier(0.4,0.2,0.2,1);
-    border-radius: 12px;
-  }
-
-  .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
-
-  .flip-front,
-  .flip-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 18px 16px;
-    text-align: center;
-  }
-
-  .flip-front {
-    background: var(--bg-card);
-    border: 1.5px solid var(--border);
-    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-    transition: border-color 0.2s, box-shadow 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .flip-front::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(to right, var(--teal-dark), var(--teal));
-  }
-
-  .flip-card:hover .flip-front {
-    border-color: var(--teal);
-    box-shadow: 0 4px 12px rgba(102,178,178,0.15);
-  }
-
-  .flip-card:focus-visible {
-    outline: 2.5px solid var(--focus);
-    outline-offset: 3px;
-    border-radius: 12px;
-  }
-
-  .flip-icon  { font-size: 32px; margin-bottom: 10px; }
-  .flip-label { font-size: 13px; font-weight: 700; color: var(--text-dark); margin-bottom: 6px; }
-  .flip-hint  { font-size: 11px; color: var(--text-light); }
-
-  .flip-back {
-    background: var(--teal-light);
-    border: 1.5px solid var(--teal-mid);
-    transform: rotateY(180deg);
-    justify-content: flex-start;
-    padding-top: 18px;
-    text-align: left;
-  }
-
-  .flip-back-title { font-size: 12px; font-weight: 800; color: var(--teal-darker); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; }
-  .flip-back-text  { font-size: 12px; color: var(--text-mid); line-height: 1.55; width: 100%; }
-  .flip-back-text strong { color: var(--text-dark); }
-  .flip-back-close { margin-top: auto; font-size: 10px; color: var(--teal-dark); font-weight: 600; text-transform: uppercase; padding-top: 8px; }
-
-  /* ── Dose Bar ── */
-  .dose-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 18px 20px;
-    margin-bottom: 24px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-  }
-
-  .dose-bar-track {
-    height: 34px;
-    border-radius: 8px;
-    overflow: hidden;
-    display: flex;
-    margin-bottom: 8px;
-    border: 1px solid var(--border);
-  }
-
-  .dose-seg {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--white);
-  }
-
-  .dose-seg.safe   { background: var(--green-border); flex: 2; }
-  .dose-seg.toxic  { background: var(--amber-border); flex: 2; }
-  .dose-seg.lethal { background: var(--red-border);   flex: 3; }
-
-  .dose-markers {
-    display: flex;
-    justify-content: space-between;
-    font-size: 11px;
-    color: var(--text-light);
-    margin-bottom: 12px;
-  }
-
-  .dose-legend { display: flex; gap: 16px; flex-wrap: wrap; }
-
-  .dose-legend-item { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--text-mid); }
-
-  .dose-swatch { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
-  .dose-swatch.safe   { background: var(--green-border); }
-  .dose-swatch.toxic  { background: var(--amber-border); }
-  .dose-swatch.lethal { background: var(--red-border); }
-
-  /* ── Cascade ── */
-  .cascade-flow {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0;
-    margin-bottom: 24px;
-  }
-
-  .cascade-node {
-    background: var(--bg-deep);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 10px 20px;
-    text-align: center;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-dark);
-    min-width: 240px;
-    max-width: 480px;
-    width: 100%;
-    cursor: pointer;
-    transition: border-color 0.2s, background 0.2s;
-  }
-
-  .cascade-node:hover { border-color: var(--teal); background: var(--teal-light); }
-
-  .cascade-node:focus-visible {
-    outline: 2px solid var(--focus);
-    outline-offset: 2px;
-  }
-
-  .cascade-node.node-start { background: var(--teal-light); border-color: var(--teal-mid); color: var(--teal-darker); }
-  .cascade-node.node-end   { background: var(--red-light);  border-color: var(--red-border); color: var(--red-dark); font-weight: 700; }
-
-  .cascade-tooltip {
-    display: none;
-    background: var(--white);
-    border: 1px solid var(--teal-mid);
-    border-radius: 8px;
-    padding: 10px 14px;
-    font-size: 12px;
-    color: var(--text-mid);
-    line-height: 1.55;
-    max-width: 480px;
-    width: 100%;
-    text-align: left;
-    margin-bottom: 2px;
-    animation: fadeIn 0.2s ease;
-  }
-
-  .cascade-tooltip.open { display: block; }
-
-  .cascade-arrow { font-size: 18px; color: var(--teal-dark); line-height: 1; padding: 2px 0; }
-
-  .cascade-branch-grid {
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    gap: 10px;
-    width: 100%;
-    max-width: 560px;
-    margin: 4px 0;
-  }
-
-  .cascade-branch-node {
-    background: var(--bg-deep);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 9px 12px;
-    text-align: center;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--text-mid);
-    cursor: pointer;
-    transition: border-color 0.2s, background 0.2s;
-  }
-
-  .cascade-branch-node:hover { border-color: var(--teal); background: var(--teal-light); }
-
-  /* ── Body Map ── */
-  .body-map-wrap {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-bottom: 24px;
-    align-items: start;
-  }
-
-  .body-svg-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 16px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-    position: relative;
-  }
-
-  .hotspot-btn {
-    position: absolute;
-    width: 26px; height: 26px;
-    border-radius: 50%;
-    background: var(--amber-border);
-    border: 2px solid var(--amber-text);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    font-weight: 800;
-    color: var(--white);
-    transition: all 0.2s;
-    animation: pulse-hs 2s infinite;
-    z-index: 10;
-  }
-
-  .hotspot-btn.visited {
-    background: var(--teal-dark);
-    border-color: var(--teal);
-    animation: none;
-  }
-
-  .hotspot-btn:hover { transform: scale(1.2); }
-
-  .hotspot-btn:focus-visible {
-    outline: 2.5px solid var(--focus);
-    outline-offset: 2px;
-  }
-
-  @keyframes pulse-hs {
-    0%,100% { box-shadow: 0 0 0 0 rgba(232,160,32,0.4); }
-    50%      { box-shadow: 0 0 0 7px rgba(232,160,32,0); }
-  }
-
-  .sign-panel {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 18px 20px;
-    min-height: 240px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-  }
-
-  .sign-placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 200px;
-    color: var(--text-light);
-    text-align: center;
-    gap: 10px;
-    font-size: 13px;
-  }
-
-  .sign-content { display: none; }
-  .sign-content.active { display: block; animation: fadeIn 0.3s ease; }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(6px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .sign-tag {
-    display: inline-block;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 2px 8px;
-    border-radius: 3px;
-    margin-bottom: 8px;
-    background: var(--amber-light);
-    color: var(--amber-text);
-    border: 1px solid var(--amber-border);
-  }
-
-  .sign-title { font-size: 15px; font-weight: 700; color: var(--text-dark); margin-bottom: 10px; }
-
-  .sign-item {
-    display: flex;
-    gap: 8px;
-    font-size: 13px;
-    color: var(--text-mid);
-    line-height: 1.45;
-    margin-bottom: 6px;
-    align-items: flex-start;
-  }
-
-  .sign-bullet { color: var(--teal-dark); font-weight: 800; flex-shrink: 0; }
-  .sign-note   { font-size: 11px; color: var(--text-light); margin-top: 2px; }
-
-  .progress-tracker {
-    margin-top: 12px;
-    padding: 10px 14px;
-    background: var(--teal-light);
-    border: 1px solid var(--teal-mid);
-    border-radius: 6px;
-    font-size: 12px;
-    color: var(--teal-darker);
-    text-align: center;
-  }
-
-  .progress-bar-thin { height: 4px; background: var(--sage-mid); border-radius: 2px; margin-top: 6px; overflow: hidden; }
-  .progress-fill-thin { height: 100%; background: var(--teal); border-radius: 2px; transition: width 0.4s ease; }
-
-  /* ── Lab Report ── */
-  .lab-report {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-    margin-bottom: 20px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-  }
-
-  .lab-header {
-    background: var(--teal-light);
-    padding: 12px 20px;
-    border-bottom: 1px solid var(--teal-mid);
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .lab-header-title { font-size: 13px; font-weight: 700; color: var(--teal-darker); margin-bottom: 2px; }
-  .lab-header-sub   { font-size: 11px; color: var(--text-light); }
-  .lab-header-alert { font-size: 11px; font-weight: 700; color: var(--amber-text); }
-
-  .lab-row {
-    display: flex;
-    align-items: center;
-    padding: 12px 20px;
-    border-bottom: 1px solid var(--border);
-    cursor: pointer;
-    transition: background 0.15s;
-    gap: 10px;
-  }
-
-  .lab-row:last-child { border-bottom: none; }
-  .lab-row:hover { background: var(--teal-light); }
-
-  .lab-row:focus-visible {
-    outline: 2px solid var(--focus);
-    outline-offset: -2px;
-  }
-
-  .lab-name     { flex: 1; font-size: 13px; font-weight: 600; color: var(--text-dark); }
-  .lab-name-sub { font-size: 11px; color: var(--text-light); font-weight: 400; display: block; margin-top: 1px; }
-  .lab-value    { font-size: 13px; font-weight: 700; min-width: 120px; text-align: right; }
-  .lab-icon     { font-size: 15px; flex-shrink: 0; }
-  .expand-hint  { font-size: 10px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.07em; flex-shrink: 0; }
-
-  .lab-row:hover .expand-hint { color: var(--teal-dark); }
-
-  .lab-expand {
-    display: none;
-    padding: 10px 20px 12px;
-    background: var(--teal-light);
-    border-top: 1px solid var(--teal-mid);
-    font-size: 12px;
-    color: var(--text-mid);
-    line-height: 1.6;
-    animation: fadeIn 0.2s ease;
-  }
-
-  .lab-expand.open { display: block; }
-  .lab-expand strong { color: var(--text-dark); }
-  .lab-expand .key-val { color: var(--teal-darker); font-weight: 700; }
-
-  .val-critical { color: var(--red-dark); }
-  .val-warning  { color: var(--amber); }
-  .val-normal   { color: var(--green-dark); }
-
-  /* ── Sequence Steps ── */
-  .seq-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-  }
-
-  .seq-step {
-    flex: 1;
-    min-width: 110px;
-    background: var(--bg-deep);
-    border-radius: 10px;
-    padding: 14px 12px;
-    text-align: center;
-    border: 1px solid var(--border);
-  }
-
-  .seq-num   { font-size: 18px; margin-bottom: 6px; }
-  .seq-label { font-size: 12px; font-weight: 700; margin-bottom: 3px; }
-  .seq-val   { font-size: 11px; color: var(--text-light); }
-  .seq-arrow { font-size: 18px; color: var(--teal-dark); flex-shrink: 0; }
-
-  /* ── DDX Accordion ── */
-  .ddx-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
-
-  .ddx-item {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    overflow: hidden;
-    transition: border-color 0.2s;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
-  }
-
-  .ddx-item:hover { border-color: var(--teal-mid); }
-  .ddx-item.open  { border-color: var(--teal-dark); }
-
-  .ddx-trigger {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 13px 16px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    font-family: inherit;
-    text-align: left;
-    transition: background 0.15s;
-  }
-
-  .ddx-trigger:hover { background: var(--teal-light); }
-
-  .ddx-trigger:focus-visible {
-    outline: 2px solid var(--focus);
-    outline-offset: -2px;
-  }
-
-  .ddx-icon    { font-size: 18px; flex-shrink: 0; }
-  .ddx-label   { flex: 1; font-size: 13px; font-weight: 600; color: var(--text-dark); line-height: 1.3; }
-  .ddx-sub     { font-size: 11px; color: var(--text-light); font-weight: 400; display: block; margin-top: 1px; }
-  .ddx-chevron { font-size: 16px; color: var(--teal-dark); transition: transform 0.25s; flex-shrink: 0; }
-
-  .ddx-item.open .ddx-chevron { transform: rotate(180deg); }
-
-  .ddx-body {
-    display: none;
-    padding: 0 16px 14px;
-    font-size: 13px;
-    color: var(--text-mid);
-    line-height: 1.65;
-    border-top: 1px solid var(--teal-mid);
-    margin: 0 16px;
-    padding-top: 12px;
-    animation: fadeIn 0.2s ease;
-  }
-
-  .ddx-item.open .ddx-body { display: block; }
-  .ddx-body strong { color: var(--text-dark); }
-  .ddx-body .hl    { color: var(--teal-darker); font-weight: 700; }
-  .ddx-body .wn    { color: var(--amber-text);  font-weight: 700; }
-  .ddx-body .dg    { color: var(--red-dark);    font-weight: 700; }
-
-  .key-diff-badge {
-    display: inline-block;
-    background: var(--teal-light);
-    color: var(--teal-darker);
-    border: 1px solid var(--teal-mid);
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    margin-bottom: 7px;
-  }
-
-  /* ── Compare Table ── */
-  .compare-wrap {
-    overflow-x: auto;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    margin-bottom: 20px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-  }
-
-  .compare-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 13px;
-    min-width: 440px;
-  }
-
-  .compare-table thead tr { background: var(--teal-light); }
-
-  .compare-table th {
-    padding: 11px 16px;
-    text-align: left;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
-    border-bottom: 2px solid var(--teal-mid);
-    color: var(--teal-darker);
-  }
-
-  .compare-table td {
-    padding: 11px 16px;
-    border-bottom: 1px solid var(--border);
-    color: var(--text-mid);
-    vertical-align: middle;
-    line-height: 1.45;
-  }
-
-  .compare-table tr:last-child td { border-bottom: none; }
-  .compare-table tr:hover td { background: var(--sage-light); }
-
-  .td-finding { font-weight: 700; color: var(--text-dark); }
-  .td-chol    { color: var(--teal-darker); font-weight: 700; }
-  .td-normal  { color: var(--green-dark);  font-weight: 600; }
-  .td-eg      { color: var(--amber-text);  font-weight: 700; }
-
-  .eg-blurred { filter: blur(5px); user-select: none; transition: filter 0.4s; }
-  .eg-blurred.revealed { filter: none; }
-
-  .reveal-prompt {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 16px;
-    background: var(--amber-light);
-    border: 1px dashed var(--amber-border);
-    border-radius: 8px;
-    font-size: 13px;
-    color: var(--amber-text);
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s;
-    margin-bottom: 12px;
-  }
-
-  .reveal-prompt:hover { background: #fde8c4; }
-  .reveal-prompt:focus-visible { outline: 2.5px solid var(--focus); outline-offset: 2px; }
-  .reveal-prompt.gone { display: none; }
-
-  /* ── Treatment Cards ── */
-  .treatment-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-    margin-bottom: 24px;
-  }
-
-  .treat-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-    cursor: pointer;
-    transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
-  }
-
-  .treat-card:hover {
-    border-color: var(--teal);
-    box-shadow: 0 3px 10px rgba(102,178,178,0.14);
-    transform: translateY(-2px);
-  }
-
-  .treat-card.expanded { border-color: var(--teal-dark); }
-
-  .treat-card:focus-visible {
-    outline: 2.5px solid var(--focus);
-    outline-offset: 2px;
-  }
-
-  .treat-header {
-    padding: 14px 16px 12px;
-    border-bottom: 1px solid var(--border);
-    background: var(--bg-deep);
-    transition: background 0.2s;
-  }
-
-  .treat-card.expanded .treat-header {
-    background: var(--teal-light);
-    border-bottom-color: var(--teal-mid);
-  }
-
-  .treat-icon-row { display: flex; align-items: center; gap: 9px; margin-bottom: 5px; }
-  .treat-icon     { font-size: 24px; }
-  .treat-name     { font-size: 13px; font-weight: 800; color: var(--text-dark); }
-  .treat-dose     { font-size: 11px; font-weight: 600; color: var(--teal-dark); margin-top: 2px; }
-  .treat-hint     { font-size: 10px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.07em; margin-top: 5px; }
-
-  .treat-card.expanded .treat-hint { display: none; }
-
-  .treat-body {
-    display: none;
-    padding: 12px 16px;
-    font-size: 12px;
-    color: var(--text-mid);
-    line-height: 1.6;
-    animation: fadeIn 0.2s ease;
-  }
-
-  .treat-card.expanded .treat-body { display: block; }
-  .treat-body strong { color: var(--text-dark); }
-
-  .treat-note-box {
-    background: var(--teal-light);
-    border: 1px solid var(--teal-mid);
-    border-left: 3px solid var(--teal);
-    border-radius: 0 6px 6px 0;
-    padding: 7px 10px;
-    font-size: 11px;
-    color: var(--text-mid);
-    line-height: 1.5;
-    margin-top: 8px;
-  }
-
-  .treat-warn-box {
-    background: var(--red-light);
-    border: 1px solid var(--red-border);
-    border-left: 3px solid var(--red-border);
-    border-radius: 0 6px 6px 0;
-    padding: 7px 10px;
-    font-size: 11px;
-    color: var(--red-text);
-    line-height: 1.5;
-    margin-top: 8px;
-  }
-
-  .treat-warn-box strong { color: var(--red-dark); }
-
-  /* ── GI Window Banner ── */
-  .gi-window {
-    background: var(--red-light);
-    border: 1px solid var(--red-border);
-    border-left: 4px solid var(--red-border);
-    border-radius: 0 12px 12px 0;
-    padding: 14px 18px;
-    margin-bottom: 20px;
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    font-size: 13px;
-    color: var(--red-text);
-    line-height: 1.6;
-  }
-
-  .gi-window-icon  { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
-  .gi-window-title { font-size: 12px; font-weight: 800; color: var(--red-dark); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
-  .gi-window strong { color: var(--red-dark); }
-
-  /* ── Monitor Table ── */
-  .monitor-table-wrap {
-    overflow-x: auto;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    margin-bottom: 20px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-  }
-
-  .monitor-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 13px;
-    min-width: 420px;
-  }
-
-  .monitor-table thead tr { background: var(--teal-light); }
-
-  .monitor-table th {
-    padding: 11px 16px;
-    text-align: left;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
-    border-bottom: 2px solid var(--teal-mid);
-    color: var(--teal-darker);
-  }
-
-  .monitor-table td {
-    padding: 10px 16px;
-    border-bottom: 1px solid var(--border);
-    color: var(--text-mid);
-    vertical-align: top;
-    font-size: 13px;
-    line-height: 1.45;
-  }
-
-  .monitor-table tr:last-child td { border-bottom: none; }
-  .monitor-table tr:hover td { background: var(--sage-light); }
-  .monitor-param { font-weight: 700; color: var(--text-dark); }
-  .monitor-freq  { color: var(--teal-dark); font-weight: 600; }
-  .monitor-goal  { color: var(--green-dark); font-weight: 600; }
-
-  /* ── Quiz ── */
-  .quiz-wrap { margin-bottom: 8px; }
-
-  .question-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px 22px 18px;
-    margin-bottom: 14px;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 1px 4px rgba(102,178,178,0.07);
-  }
-
-  .question-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(to right, var(--teal-dark), var(--teal));
-  }
-
-  .q-num {
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.11em;
-    color: var(--teal-dark);
-    margin-bottom: 9px;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-  }
-
-  .q-num::after { content: ''; flex: 1; height: 1px; background: var(--teal-mid); }
-
-  .q-text { font-size: 15px; font-weight: 600; color: var(--text-dark); line-height: 1.5; }
-
-  .options-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
-    margin-bottom: 12px;
-  }
-
-  .opt-btn {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 16px;
-    background: var(--bg-card);
-    border: 1.5px solid var(--border);
-    border-radius: 9px;
-    cursor: pointer;
-    font-size: 13px;
-    color: var(--text-mid);
-    text-align: left;
-    transition: all 0.2s;
-    font-family: inherit;
-    line-height: 1.4;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
-  }
-
-  .opt-btn:hover:not(:disabled) {
-    border-color: var(--teal);
-    color: var(--text-dark);
-    background: var(--teal-light);
-    transform: translateX(3px);
-  }
-
-  .opt-btn:focus-visible { outline: 2.5px solid var(--focus); outline-offset: 2px; }
-  .opt-btn:disabled { cursor: default; transform: none; }
-
-  .opt-letter {
-    flex-shrink: 0;
-    width: 27px; height: 27px;
-    border-radius: 50%;
-    background: var(--sage-light);
-    border: 1.5px solid var(--sage);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    font-weight: 800;
-    color: var(--text-light);
-    transition: all 0.2s;
-  }
-
-  .opt-btn:hover:not(:disabled) .opt-letter { background: var(--teal-mid); border-color: var(--teal); color: var(--teal-darker); }
-
-  .opt-btn.correct   { border-color: var(--green-border); background: var(--green-light); color: var(--green-text); }
-  .opt-btn.incorrect { border-color: var(--red-border);   background: var(--red-light);   color: var(--red-text); }
-  .opt-btn.dimmed    { opacity: 0.4; }
-
-  .opt-btn.correct   .opt-letter { background: var(--green-border); border-color: var(--green-border); color: var(--white); font-size: 13px; }
-  .opt-btn.incorrect .opt-letter { background: var(--red-border);   border-color: var(--red-border);   color: var(--white); font-size: 13px; }
-
-  .feedback-box {
-    display: none;
-    border-radius: 9px;
-    padding: 12px 15px;
-    font-size: 13px;
-    line-height: 1.6;
-    margin-top: 4px;
-    animation: fadeIn 0.3s ease;
-  }
-
-  .feedback-box.correct-fb  { display: block; background: var(--green-light); border: 1px solid var(--green-border); color: var(--green-text); }
-  .feedback-box.incorrect-fb{ display: block; background: var(--red-light);   border: 1px solid var(--red-border);   color: var(--red-text); }
-
-  .fb-strong { font-weight: 700; display: block; margin-bottom: 3px; font-size: 13px; }
-  .correct-fb  .fb-strong { color: var(--green-dark); }
-  .incorrect-fb .fb-strong { color: var(--red-dark); }
-
-  .q-block.hidden { display: none; }
-  .q-block.reveal { animation: fadeIn 0.45s ease; }
-
-  .continue-hint { display: none; text-align: center; font-size: 12px; color: var(--teal-dark); font-weight: 600; margin-top: 8px; animation: pulse-hint 1.5s ease infinite; }
-  .continue-hint.visible { display: block; }
-
-  @keyframes pulse-hint { 0%,100%{opacity:1}50%{opacity:0.4} }
-
-  .q-divider { height: 1px; background: var(--sage-mid); margin: 18px 0; }
-
-  /* ── Score Card ── */
-  .score-card {
-    display: none;
-    background: var(--bg-card);
-    border: 1px solid var(--teal-mid);
-    border-radius: 12px;
-    padding: 28px 24px;
-    text-align: center;
-    animation: fadeIn 0.4s ease;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(102,178,178,0.1);
-    margin-top: 8px;
-  }
-
-  .score-card::before { content:''; position:absolute; top:0;left:0;right:0; height:3px; background:linear-gradient(to right, var(--teal-dark), var(--teal)); }
-  .score-card.visible { display: block; }
-
-  .score-emoji    { font-size: 44px; margin-bottom: 10px; display: block; }
-  .score-headline { font-size: 18px; font-weight: 800; color: var(--text-dark); margin-bottom: 6px; }
-  .score-sub      { font-size: 13px; color: var(--text-light); line-height: 1.6; max-width: 420px; margin: 0 auto 16px; }
-
-  .score-pills { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
-
-  .score-pill { padding: 6px 14px; border-radius: 30px; font-size: 11px; font-weight: 700; }
-  .pill-correct  { background: var(--green-light); border: 1.5px solid var(--green-border); color: var(--green-text); }
-  .pill-incorrect{ background: var(--red-light);   border: 1.5px solid var(--red-border);   color: var(--red-text); }
-  .pill-neutral  { background: var(--teal-light);  border: 1.5px solid var(--teal-mid);     color: var(--teal-darker); }
-
-  /* ── Summary Reference ── */
-  .summary-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-    margin-bottom: 24px;
-  }
-
-  .sum-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-  }
-
-  .sum-header { padding: 11px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
-  .sum-header.hd-teal  { background: var(--teal-light);  border-bottom-color: var(--teal-mid); }
-  .sum-header.hd-amber { background: var(--amber-light); border-bottom-color: rgba(232,160,32,0.3); }
-  .sum-header.hd-green { background: var(--green-light); border-bottom-color: rgba(82,183,136,0.3); }
-  .sum-header.hd-red   { background: var(--red-light);   border-bottom-color: rgba(224,112,112,0.3); }
-
-  .sum-icon  { font-size: 18px; flex-shrink: 0; }
-  .sum-title { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.09em; }
-  .hd-teal  .sum-title { color: var(--teal-darker); }
-  .hd-amber .sum-title { color: var(--amber-text); }
-  .hd-green .sum-title { color: var(--green-dark); }
-  .hd-red   .sum-title { color: var(--red-dark); }
-
-  .sum-body { padding: 12px 16px; display: flex; flex-direction: column; gap: 7px; }
-
-  .sum-item { display: flex; align-items: flex-start; gap: 7px; font-size: 12px; color: var(--text-mid); line-height: 1.4; }
-  .sum-bullet { color: var(--teal-dark); font-weight: 800; flex-shrink: 0; font-size: 11px; margin-top: 1px; }
-  .sum-val   { color: var(--teal-darker); font-weight: 700; }
-  .sum-warn  { color: var(--amber);       font-weight: 700; }
-  .sum-alert { color: var(--red-dark);    font-weight: 700; }
-
-  /* ── Numbers Strip 3x2 ── */
-  .numbers-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-bottom: 24px;
-  }
-
-  .num-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 18px 14px 14px;
-    text-align: center;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .num-card::before { content:''; position:absolute; top:0;left:0;right:0; height:3px; }
-  .num-card.nc-teal::before   { background: var(--teal); }
-  .num-card.nc-amber::before  { background: var(--amber-border); }
-  .num-card.nc-red::before    { background: var(--red-border); }
-  .num-card.nc-green::before  { background: var(--green-border); }
-
-  .num-icon   { font-size: 24px; margin-bottom: 8px; }
-  .num-label  { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); margin-bottom: 6px; }
-  .num-value  { font-size: 18px; font-weight: 800; line-height: 1.1; margin-bottom: 4px; }
-  .num-note   { font-size: 11px; color: var(--text-light); line-height: 1.4; }
-
-  .nc-teal  .num-value { color: var(--teal-darker); }
-  .nc-amber .num-value { color: var(--amber); }
-  .nc-red   .num-value { color: var(--red-dark); }
-  .nc-green .num-value { color: var(--green-dark); }
-
-  /* ── Progress Bar ── */
-  .progress-wrap { margin-bottom: 20px; }
-
-  .progress-meta { display: flex; justify-content: space-between; margin-bottom: 6px; }
-  .progress-lbl  { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; color: var(--text-light); }
-  .progress-frac { font-size: 11px; color: var(--text-light); font-weight: 600; }
-
-  .progress-track { height: 5px; background: var(--sage-mid); border-radius: 3px; overflow: hidden; }
-  .progress-fill  { height: 100%; background: linear-gradient(to right, var(--teal-dark), var(--teal)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
-
-  /* ── Callouts ── */
-  .callout-amber {
-    background: var(--amber-light);
-    border: 1px solid rgba(232,160,32,0.3);
-    border-left: 3px solid var(--amber-border);
-    border-radius: 0 8px 8px 0;
-    padding: 11px 14px;
-    font-size: 13px;
-    color: var(--amber);
-    line-height: 1.55;
-    margin-bottom: 16px;
-  }
-
-  .callout-amber strong { color: var(--amber-text); }
-
-  .callout-teal {
-    background: var(--teal-light);
-    border: 1px solid var(--teal-mid);
-    border-left: 3px solid var(--teal);
-    border-radius: 0 8px 8px 0;
-    padding: 11px 14px;
-    font-size: 13px;
-    color: var(--text-mid);
-    line-height: 1.55;
-    margin-bottom: 16px;
-  }
-
-  .callout-teal strong { color: var(--text-dark); }
-
-  /* ── Footer ── */
-  footer {
-    background: var(--teal-light);
-    border-top: 1px solid var(--teal-mid);
-    padding: 28px 24px;
-    text-align: center;
-    font-size: 12px;
-    color: var(--text-light);
-    line-height: 1.7;
-  }
-
-  footer strong { color: var(--text-dark); }
-
-  footer a {
-    color: var(--teal-dark);
-    text-decoration: underline;
-  }
-
-  .footer-disclaimer {
-    background: var(--amber-light);
-    border: 1px solid var(--amber-border);
-    border-radius: 8px;
-    padding: 12px 16px;
-    max-width: 700px;
-    margin: 0 auto 14px;
-    font-size: 12px;
-    color: var(--amber-text);
-    line-height: 1.6;
-    text-align: left;
-  }
-
-  .footer-disclaimer strong { color: var(--amber-text); font-weight: 800; }
-
-  /* ── Btn ── */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    padding: 10px 22px;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 700;
-    cursor: pointer;
-    border: none;
-    font-family: inherit;
-    letter-spacing: 0.03em;
-    transition: all 0.2s;
-  }
-
-  .btn:focus-visible { outline: 2.5px solid var(--focus); outline-offset: 2px; }
-  .btn-primary { background: var(--teal-dark); color: var(--white); }
-  .btn-primary:hover { background: var(--teal); transform: translateY(-1px); }
-  .btn-secondary { background: var(--sage-light); color: var(--text-mid); border: 1.5px solid var(--sage-mid); }
-  .btn-secondary:hover { background: var(--sage-mid); color: var(--text-dark); }
-
-  /* ── Responsive ── */
-  @media (max-width: 700px) {
-    .nav-links      { display: none; }
-    .nav-hamburger  { display: flex; }
-    .flip-grid-2x2  { grid-template-columns: 1fr; }
-    .flip-card      { height: 180px; }
-    .body-map-wrap  { grid-template-columns: 1fr; }
-    .treatment-grid { grid-template-columns: 1fr; }
-    .summary-grid   { grid-template-columns: 1fr; }
-    .numbers-grid   { grid-template-columns: repeat(2,1fr); }
-    .cascade-branch-grid { grid-template-columns: 1fr; }
-  }
-
-  @media (max-width: 400px) {
-    .numbers-grid { grid-template-columns: 1fr; }
-  }
-
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cholecalciferol Toxicology — Veterinary Medicine</title>
+  <meta name="description" content="An interactive veterinary toxicology module on cholecalciferol (Vitamin D3) toxicosis in dogs and cats.">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --white:        #ffffff;
+      --sage:         #cbd2c8;
+      --teal:         #66b2b2;
+      --teal-dark:    #3d8a8a;
+      --teal-darker:  #2a6666;
+      --teal-light:   #e8f4f4;
+      --teal-mid:     #c2dede;
+      --sage-light:   #f0f2ef;
+      --sage-mid:     #e2e6e0;
+      --sage-dark:    #7a8878;
+      --text-dark:    #1a2e2e;
+      --text-mid:     #3d5452;
+      --text-light:   #607472;
+      --amber:        #c47d10;
+      --amber-light:  #fdf3e3;
+      --amber-border: #e8a020;
+      --amber-text:   #7a4d00;
+      --green-dark:   #1e6b45;
+      --green-light:  #eaf6ef;
+      --green-border: #52b788;
+      --green-text:   #1e6b45;
+      --red-dark:     #922b21;
+      --red-light:    #fdf0ef;
+      --red-border:   #e07070;
+      --red-text:     #7b2020;
+      --bg-page:      #f5f7f5;
+      --bg-card:      #ffffff;
+      --bg-deep:      #f0f4f4;
+      --border:       #dde3db;
+      --focus:        #66b2b2;
+      --nav-height:   60px;
+    }
+
+    /* ── Skip Link ── */
+    .skip-link {
+      position: absolute; top: -100px; left: 16px;
+      background: var(--teal-dark); color: var(--white);
+      padding: 8px 16px; border-radius: 0 0 8px 8px;
+      font-size: 13px; font-weight: 700; z-index: 9999;
+      transition: top 0.2s; text-decoration: none;
+    }
+    .skip-link:focus { top: 0; }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg-page); color: var(--text-dark);
+      min-height: 100vh;
+    }
+
+    /* ── Top Nav ── */
+    .top-nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: var(--nav-height);
+      background: rgba(255,255,255,0.97);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding: 0 24px; z-index: 500;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 1px 6px rgba(102,178,178,0.08);
+    }
+    .nav-brand {
+      font-size: 13px; font-weight: 800; color: var(--teal-darker);
+      letter-spacing: 0.04em; text-decoration: none;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .nav-brand-icon { font-size: 18px; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a {
+      font-size: 12px; font-weight: 600; color: var(--text-light);
+      text-decoration: none; padding: 6px 10px;
+      border-radius: 6px; transition: all 0.2s; white-space: nowrap;
+    }
+    .nav-links a:hover { color: var(--teal-dark); background: var(--teal-light); }
+    .nav-links a:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 4px;
+      background: none; border: none; cursor: pointer;
+      padding: 6px; border-radius: 6px;
+    }
+    .nav-hamburger:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+    .nav-hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--teal-dark); border-radius: 2px; transition: all 0.2s;
+    }
+    .mobile-menu {
+      display: none; position: fixed;
+      top: var(--nav-height); left: 0; right: 0;
+      background: var(--white); border-bottom: 1px solid var(--border);
+      padding: 12px 16px; z-index: 499;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu a {
+      display: block; font-size: 14px; font-weight: 600;
+      color: var(--text-mid); text-decoration: none;
+      padding: 10px 12px; border-radius: 8px; transition: all 0.15s;
+    }
+    .mobile-menu a:hover { background: var(--teal-light); color: var(--teal-dark); }
+
+    /* ── Page Layout ── */
+    .page-wrap { padding-top: var(--nav-height); }
+    .section { padding: 56px 24px; max-width: 860px; margin: 0 auto; }
+    .section + .section { border-top: 1px solid var(--border); }
+
+    /* ── Section Labels ── */
+    .section-tag {
+      display: inline-block; font-size: 10px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--teal-dark); background: var(--teal-light);
+      border: 1px solid var(--teal-mid); padding: 3px 12px;
+      border-radius: 4px; margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(20px, 3.5vw, 28px); font-weight: 800;
+      color: var(--text-dark); line-height: 1.2; margin-bottom: 8px;
+    }
+    .section-lead {
+      font-size: 15px; color: var(--text-light); line-height: 1.65;
+      max-width: 640px; margin-bottom: 28px;
+    }
+    .col-label {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--teal-dark); margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .col-label::after { content: ''; flex: 1; height: 1px; background: var(--teal-mid); }
+
+    /* ── Hero ── */
+    #hero {
+      background: linear-gradient(135deg, var(--teal-light) 0%, #d4eded 50%, var(--sage-light) 100%);
+      border-bottom: 1px solid var(--teal-mid); padding: 64px 24px 56px;
+    }
+    .hero-inner { max-width: 860px; margin: 0 auto; }
+    .hero-tag {
+      display: inline-block; font-size: 10px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal-dark);
+      background: rgba(255,255,255,0.7); border: 1px solid var(--teal-mid);
+      padding: 3px 12px; border-radius: 4px; margin-bottom: 16px;
+    }
+    .hero-title {
+      font-size: clamp(24px, 4vw, 36px); font-weight: 800; color: var(--text-dark);
+      line-height: 1.2; margin-bottom: 12px; max-width: 700px;
+    }
+    .hero-sub {
+      font-size: 15px; color: var(--text-mid); line-height: 1.65;
+      max-width: 580px; margin-bottom: 28px;
+    }
+    .hero-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
+    .hero-chip {
+      display: flex; align-items: center; gap: 7px;
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 30px; padding: 6px 14px; font-size: 12px;
+      font-weight: 600; color: var(--text-mid);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    }
+    .hero-chip-icon { font-size: 14px; }
+    .hero-patient {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 14px; padding: 18px 22px; max-width: 560px;
+      display: flex; gap: 16px; align-items: flex-start;
+      box-shadow: 0 2px 8px rgba(102,178,178,0.1);
+    }
+    .hero-patient-icon { font-size: 40px; flex-shrink: 0; }
+    .hero-patient-name {
+      font-size: 13px; font-weight: 800; color: var(--teal-darker);
+      text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px;
+    }
+    .hero-patient-desc { font-size: 13px; color: var(--text-mid); line-height: 1.55; margin-bottom: 10px; }
+    .hero-badges { display: flex; flex-wrap: wrap; gap: 6px; }
+    .badge {
+      font-size: 11px; font-weight: 700; padding: 3px 10px;
+      border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .badge-red   { background: var(--red-light);   border: 1px solid var(--red-border);   color: var(--red-dark); }
+    .badge-amber { background: var(--amber-light);  border: 1px solid var(--amber-border); color: var(--amber-text); }
+    .badge-teal  { background: var(--teal-light);   border: 1px solid var(--teal-mid);     color: var(--teal-darker); }
+
+    /* ── Disclaimer ── */
+    .disclaimer {
+      background: var(--amber-light); border: 1px solid var(--amber-border);
+      border-left: 4px solid var(--amber-border); border-radius: 0 10px 10px 0;
+      padding: 14px 18px; margin: 0 auto;
+      max-width: 860px; display: flex; gap: 12px;
+      align-items: flex-start; font-size: 13px;
+      color: var(--amber); line-height: 1.6;
+    }
+    .disclaimer-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .disclaimer strong { color: var(--amber-text); }
+
+    /* ── Flip Cards ── */
+    .flip-grid-2x2 {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 16px; margin-bottom: 24px;
+    }
+    .flip-card {
+      perspective: 1000px;
+      height: 196px;
+      cursor: pointer;
+    }
+    .flip-inner {
+      position: relative;
+      width: 100%; height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
+      border-radius: 12px;
+    }
+    .flip-card.flipped .flip-inner {
+      transform: rotateY(180deg);
+    }
+    .flip-front,
+    .flip-back {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 16px;
+      text-align: center;
+    }
+    .flip-front {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+    .flip-front::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(to right, var(--teal-dark), var(--teal));
+    }
+    .flip-card:hover .flip-front {
+      border-color: var(--teal);
+      box-shadow: 0 4px 12px rgba(102,178,178,0.15);
+    }
+    .flip-card:focus-visible {
+      outline: 2.5px solid var(--focus); outline-offset: 3px; border-radius: 12px;
+    }
+    .flip-icon  { font-size: 32px; margin-bottom: 10px; }
+    .flip-label { font-size: 13px; font-weight: 700; color: var(--text-dark); margin-bottom: 6px; }
+    .flip-hint  { font-size: 11px; color: var(--text-light); }
+    .flip-back {
+      background: var(--teal-light);
+      border: 1.5px solid var(--teal-mid);
+      transform: rotateY(180deg);
+      justify-content: flex-start;
+      padding-top: 18px;
+      text-align: left;
+    }
+    .flip-back-title {
+      font-size: 12px; font-weight: 800; color: var(--teal-darker);
+      text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px;
+    }
+    .flip-back-text { font-size: 12px; color: var(--text-mid); line-height: 1.55; width: 100%; }
+    .flip-back-text strong { color: var(--text-dark); }
+    .flip-back-close {
+      margin-top: auto; font-size: 10px; color: var(--teal-dark);
+      font-weight: 600; text-transform: uppercase; padding-top: 8px;
+    }
+
+    /* ── Dose Bar ── */
+    .dose-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 18px 20px; margin-bottom: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .dose-bar-track {
+      height: 34px; border-radius: 8px; overflow: hidden;
+      display: flex; margin-bottom: 8px; border: 1px solid var(--border);
+    }
+    .dose-seg {
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; color: var(--white);
+    }
+    .dose-seg.safe   { background: var(--green-border); flex: 2; }
+    .dose-seg.toxic  { background: var(--amber-border); flex: 2; }
+    .dose-seg.lethal { background: var(--red-border);   flex: 3; }
+    .dose-markers {
+      display: flex; justify-content: space-between;
+      font-size: 11px; color: var(--text-light); margin-bottom: 12px;
+    }
+    .dose-legend { display: flex; gap: 16px; flex-wrap: wrap; }
+    .dose-legend-item { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--text-mid); }
+    .dose-swatch { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+    .dose-swatch.safe   { background: var(--green-border); }
+    .dose-swatch.toxic  { background: var(--amber-border); }
+    .dose-swatch.lethal { background: var(--red-border); }
+
+    /* ── Cascade ── */
+    .cascade-flow {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 0; margin-bottom: 24px;
+    }
+    .cascade-node {
+      background: var(--bg-deep); border: 1px solid var(--border);
+      border-radius: 8px; padding: 10px 20px;
+      text-align: center; font-size: 13px; font-weight: 600;
+      color: var(--text-dark); min-width: 240px; max-width: 480px;
+      width: 100%; cursor: pointer; transition: border-color 0.2s, background 0.2s;
+    }
+    .cascade-node:hover { border-color: var(--teal); background: var(--teal-light); }
+    .cascade-node:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+    .cascade-node.node-start { background: var(--teal-light); border-color: var(--teal-mid); color: var(--teal-darker); }
+    .cascade-node.node-end   { background: var(--red-light);  border-color: var(--red-border); color: var(--red-dark); font-weight: 700; }
+    .cascade-tooltip {
+      display: none; background: var(--white);
+      border: 1px solid var(--teal-mid); border-radius: 8px;
+      padding: 10px 14px; font-size: 12px; color: var(--text-mid);
+      line-height: 1.55; max-width: 480px; width: 100%;
+      text-align: left; margin-bottom: 2px; animation: fadeIn 0.2s ease;
+    }
+    .cascade-tooltip.open { display: block; }
+    .cascade-arrow { font-size: 18px; color: var(--teal-dark); line-height: 1; padding: 2px 0; }
+    .cascade-branch-grid {
+      display: grid; grid-template-columns: repeat(2,1fr);
+      gap: 10px; width: 100%; max-width: 560px; margin: 4px 0;
+    }
+    .cascade-branch-node {
+      background: var(--bg-deep); border: 1px solid var(--border);
+      border-radius: 8px; padding: 9px 12px; text-align: center;
+      font-size: 12px; font-weight: 600; color: var(--text-mid);
+      cursor: pointer; transition: border-color 0.2s, background 0.2s;
+    }
+    .cascade-branch-node:hover { border-color: var(--teal); background: var(--teal-light); }
+
+    /* ── Body Map ── */
+    .body-map-wrap {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 20px; margin-bottom: 24px; align-items: start;
+    }
+    .body-svg-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04); position: relative;
+    }
+    .hotspot-btn {
+      position: absolute; width: 26px; height: 26px;
+      border-radius: 50%; background: var(--amber-border);
+      border: 2px solid var(--amber-text); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 800; color: var(--white);
+      transition: all 0.2s; animation: pulse-hs 2s infinite; z-index: 10;
+    }
+    .hotspot-btn.visited { background: var(--teal-dark); border-color: var(--teal); animation: none; }
+    .hotspot-btn:hover { transform: scale(1.2); }
+    .hotspot-btn:focus-visible { outline: 2.5px solid var(--focus); outline-offset: 2px; }
+    @keyframes pulse-hs {
+      0%,100% { box-shadow: 0 0 0 0 rgba(232,160,32,0.4); }
+      50%      { box-shadow: 0 0 0 7px rgba(232,160,32,0); }
+    }
+    .sign-panel {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 18px 20px; min-height: 240px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .sign-placeholder {
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; height: 200px; color: var(--text-light);
+      text-align: center; gap: 10px; font-size: 13px;
+    }
+    .sign-content { display: none; }
+    .sign-content.active { display: block; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .sign-tag {
+      display: inline-block; font-size: 10px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 2px 8px; border-radius: 3px; margin-bottom: 8px;
+      background: var(--amber-light); color: var(--amber-text);
+      border: 1px solid var(--amber-border);
+    }
+    .sign-title { font-size: 15px; font-weight: 700; color: var(--text-dark); margin-bottom: 10px; }
+    .sign-item {
+      display: flex; gap: 8px; font-size: 13px; color: var(--text-mid);
+      line-height: 1.45; margin-bottom: 6px; align-items: flex-start;
+    }
+    .sign-bullet { color: var(--teal-dark); font-weight: 800; flex-shrink: 0; }
+    .sign-note   { font-size: 11px; color: var(--text-light); margin-top: 2px; }
+    .progress-tracker {
+      margin-top: 12px; padding: 10px 14px;
+      background: var(--teal-light); border: 1px solid var(--teal-mid);
+      border-radius: 6px; font-size: 12px; color: var(--teal-darker); text-align: center;
+    }
+    .progress-bar-thin { height: 4px; background: var(--sage-mid); border-radius: 2px; margin-top: 6px; overflow: hidden; }
+    .progress-fill-thin { height: 100%; background: var(--teal); border-radius: 2px; transition: width 0.4s ease; }
+
+    /* ── Lab Report ── */
+    .lab-report {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden; margin-bottom: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+    .lab-header {
+      background: var(--teal-light); padding: 12px 20px;
+      border-bottom: 1px solid var(--teal-mid);
+      display: flex; justify-content: space-between;
+      align-items: flex-end; flex-wrap: wrap; gap: 8px;
+    }
+    .lab-header-title { font-size: 13px; font-weight: 700; color: var(--teal-darker); margin-bottom: 2px; }
+    .lab-header-sub   { font-size: 11px; color: var(--text-light); }
+    .lab-header-alert { font-size: 11px; font-weight: 700; color: var(--amber-text); }
+    .lab-row {
+      display: flex; align-items: center; padding: 12px 20px;
+      border-bottom: 1px solid var(--border); cursor: pointer;
+      transition: background 0.15s; gap: 10px;
+    }
+    .lab-row:last-child { border-bottom: none; }
+    .lab-row:hover { background: var(--teal-light); }
+    .lab-row:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+    .lab-name     { flex: 1; font-size: 13px; font-weight: 600; color: var(--text-dark); }
+    .lab-name-sub { font-size: 11px; color: var(--text-light); font-weight: 400; display: block; margin-top: 1px; }
+    .lab-value    { font-size: 13px; font-weight: 700; min-width: 120px; text-align: right; }
+    .lab-icon     { font-size: 15px; flex-shrink: 0; }
+    .expand-hint  { font-size: 10px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.07em; flex-shrink: 0; }
+    .lab-row:hover .expand-hint { color: var(--teal-dark); }
+    .lab-expand {
+      display: none; padding: 10px 20px 12px;
+      background: var(--teal-light); border-top: 1px solid var(--teal-mid);
+      font-size: 12px; color: var(--text-mid); line-height: 1.6;
+      animation: fadeIn 0.2s ease;
+    }
+    .lab-expand.open { display: block; }
+    .lab-expand strong { color: var(--text-dark); }
+    .lab-expand .key-val { color: var(--teal-darker); font-weight: 700; }
+    .val-critical { color: var(--red-dark); }
+    .val-warning  { color: var(--amber); }
+    .val-normal   { color: var(--green-dark); }
+
+    /* ── Sequence Steps ── */
+    .seq-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+    .seq-step {
+      flex: 1; min-width: 110px; background: var(--bg-deep);
+      border-radius: 10px; padding: 14px 12px; text-align: center; border: 1px solid var(--border);
+    }
+    .seq-num   { font-size: 18px; margin-bottom: 6px; }
+    .seq-label { font-size: 12px; font-weight: 700; margin-bottom: 3px; }
+    .seq-val   { font-size: 11px; color: var(--text-light); }
+    .seq-arrow { font-size: 18px; color: var(--teal-dark); flex-shrink: 0; }
+
+    /* ── DDX Accordion ── */
+    .ddx-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .ddx-item {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 10px; overflow: hidden;
+      transition: border-color 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    }
+    .ddx-item:hover { border-color: var(--teal-mid); }
+    .ddx-item.open  { border-color: var(--teal-dark); }
+    .ddx-trigger {
+      width: 100%; display: flex; align-items: center; gap: 10px;
+      padding: 13px 16px; background: transparent; border: none;
+      cursor: pointer; font-family: inherit; text-align: left; transition: background 0.15s;
+    }
+    .ddx-trigger:hover { background: var(--teal-light); }
+    .ddx-trigger:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+    .ddx-icon    { font-size: 18px; flex-shrink: 0; }
+    .ddx-label   { flex: 1; font-size: 13px; font-weight: 600; color: var(--text-dark); line-height: 1.3; }
+    .ddx-sub     { font-size: 11px; color: var(--text-light); font-weight: 400; display: block; margin-top: 1px; }
+    .ddx-chevron { font-size: 16px; color: var(--teal-dark); transition: transform 0.25s; flex-shrink: 0; }
+    .ddx-item.open .ddx-chevron { transform: rotate(180deg); }
+    .ddx-body {
+      display: none; padding: 0 16px 14px;
+      font-size: 13px; color: var(--text-mid); line-height: 1.65;
+      border-top: 1px solid var(--teal-mid); margin: 0 16px; padding-top: 12px;
+      animation: fadeIn 0.2s ease;
+    }
+    .ddx-item.open .ddx-body { display: block; }
+    .ddx-body strong { color: var(--text-dark); }
+    .ddx-body .hl  { color: var(--teal-darker); font-weight: 700; }
+    .ddx-body .wn  { color: var(--amber-text);  font-weight: 700; }
+    .ddx-body .dg  { color: var(--red-dark);    font-weight: 700; }
+    .key-diff-badge {
+      display: inline-block; background: var(--teal-light);
+      color: var(--teal-darker); border: 1px solid var(--teal-mid);
+      padding: 2px 8px; border-radius: 4px; font-size: 10px;
+      font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 7px;
+    }
+
+    /* ── Compare Table ── */
+    .compare-wrap {
+      overflow-x: auto; border-radius: 10px;
+      border: 1px solid var(--border); margin-bottom: 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .compare-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 440px; }
+    .compare-table thead tr { background: var(--teal-light); }
+    .compare-table th {
+      padding: 11px 16px; text-align: left; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.09em; text-transform: uppercase;
+      border-bottom: 2px solid var(--teal-mid); color: var(--teal-darker);
+    }
+    .compare-table td {
+      padding: 11px 16px; border-bottom: 1px solid var(--border);
+      color: var(--text-mid); vertical-align: middle; line-height: 1.45;
+    }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table tr:hover td { background: var(--sage-light); }
+    .td-finding { font-weight: 700; color: var(--text-dark); }
+    .td-chol    { color: var(--teal-darker); font-weight: 700; }
+    .td-normal  { color: var(--green-dark);  font-weight: 600; }
+    .td-eg      { color: var(--amber-text);  font-weight: 700; }
+    .eg-blurred { filter: blur(5px); user-select: none; transition: filter 0.4s; }
+    .eg-blurred.revealed { filter: none; }
+    .reveal-prompt {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 16px; background: var(--amber-light);
+      border: 1px dashed var(--amber-border); border-radius: 8px;
+      font-size: 13px; color: var(--amber-text); font-weight: 600;
+      cursor: pointer; transition: background 0.2s; margin-bottom: 12px;
+    }
+    .reveal-prompt:hover { background: #fde8c4; }
+    .reveal-prompt:focus-visible { outline: 2.5px solid var(--focus); outline-offset: 2px; }
+    .reveal-prompt.gone { display: none; }
+
+    /* ── Treatment Cards ── */
+    .treatment-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 24px; }
+    .treat-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04); cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+    }
+    .treat-card:hover {
+      border-color: var(--teal); box-shadow: 0 3px 10px rgba(102,178,178,0.14);
+      transform: translateY(-2px);
+    }
+    .treat-card.expanded { border-color: var(--teal-dark); }
+    .treat-card:focus-visible { outline: 2.5px solid var(--focus); outline-offset: 2px; }
+    .treat-header {
+      padding: 14px 16px 12px; border-bottom: 1px solid var(--border);
+      background: var(--bg-deep); transition: background 0.2s;
+    }
+    .treat-card.expanded .treat-header { background: var(--teal-light); border-bottom-color: var(--teal-mid); }
+    .treat-icon-row { display: flex; align-items: center; gap: 9px; margin-bottom: 5px; }
+    .treat-icon     { font-size: 24px; }
+    .treat-name     { font-size: 13px; font-weight: 800; color: var(--text-dark); }
+    .treat-dose     { font-size: 11px; font-weight: 600; color: var(--teal-dark); margin-top: 2px; }
+    .treat-hint     { font-size: 10px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.07em; margin-top: 5px; }
+    .treat-card.expanded .treat-hint { display: none; }
+    .treat-body {
+      display: none; padding: 12px 16px;
+      font-size: 12px; color: var(--text-mid); line-height: 1.6;
+      animation: fadeIn 0.2s ease;
+    }
+    .treat-card.expanded .treat-body { display: block; }
+    .treat-body strong { color: var(--text-dark); }
+    .treat-note-box {
+      background: var(--teal-light); border: 1px solid var(--teal-mid);
+      border-left: 3px solid var(--teal); border-radius: 0 6px 6px 0;
+      padding: 7px 10px; font-size: 11px; color: var(--text-mid);
+      line-height: 1.5; margin-top: 8px;
+    }
+    .treat-warn-box {
+      background: var(--red-light); border: 1px solid var(--red-border);
+      border-left: 3px solid var(--red-border); border-radius: 0 6px 6px 0;
+      padding: 7px 10px; font-size: 11px; color: var(--red-text);
+      line-height: 1.5; margin-top: 8px;
+    }
+    .treat-warn-box strong { color: var(--red-dark); }
+
+    /* ── GI Window ── */
+    .gi-window {
+      background: var(--red-light); border: 1px solid var(--red-border);
+      border-left: 4px solid var(--red-border); border-radius: 0 12px 12px 0;
+      padding: 14px 18px; margin-bottom: 20px;
+      display: flex; gap: 12px; align-items: flex-start;
+      font-size: 13px; color: var(--red-text); line-height: 1.6;
+    }
+    .gi-window-icon  { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+    .gi-window-title { font-size: 12px; font-weight: 800; color: var(--red-dark); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+    .gi-window strong { color: var(--red-dark); }
+
+    /* ── Monitor Table ── */
+    .monitor-table-wrap {
+      overflow-x: auto; border-radius: 10px;
+      border: 1px solid var(--border); margin-bottom: 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .monitor-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 420px; }
+    .monitor-table thead tr { background: var(--teal-light); }
+    .monitor-table th {
+      padding: 11px 16px; text-align: left; font-size: 11px;
+      font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase;
+      border-bottom: 2px solid var(--teal-mid); color: var(--teal-darker);
+    }
+    .monitor-table td {
+      padding: 10px 16px; border-bottom: 1px solid var(--border);
+      color: var(--text-mid); vertical-align: top; font-size: 13px; line-height: 1.45;
+    }
+    .monitor-table tr:last-child td { border-bottom: none; }
+    .monitor-table tr:hover td { background: var(--sage-light); }
+    .monitor-param { font-weight: 700; color: var(--text-dark); }
+    .monitor-freq  { color: var(--teal-dark); font-weight: 600; }
+    .monitor-goal  { color: var(--green-dark); font-weight: 600; }
+
+    /* ── Quiz ── */
+    .quiz-wrap { margin-bottom: 8px; }
+    .question-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 20px 22px 18px; margin-bottom: 14px;
+      position: relative; overflow: hidden;
+      box-shadow: 0 1px 4px rgba(102,178,178,0.07);
+    }
+    .question-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(to right, var(--teal-dark), var(--teal));
+    }
+    .q-num {
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.11em; color: var(--teal-dark); margin-bottom: 9px;
+      display: flex; align-items: center; gap: 7px;
+    }
+    .q-num::after { content: ''; flex: 1; height: 1px; background: var(--teal-mid); }
+    .q-text { font-size: 15px; font-weight: 600; color: var(--text-dark); line-height: 1.5; }
+    .options-list { list-style: none; display: flex; flex-direction: column; gap: 9px; margin-bottom: 12px; }
+    .opt-btn {
+      width: 100%; display: flex; align-items: center; gap: 12px;
+      padding: 12px 16px; background: var(--bg-card);
+      border: 1.5px solid var(--border); border-radius: 9px; cursor: pointer;
+      font-size: 13px; color: var(--text-mid); text-align: left;
+      transition: all 0.2s; font-family: inherit; line-height: 1.4;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+    .opt-btn:hover:not(:disabled) {
+      border-color: var(--teal); color: var(--text-dark);
+      background: var(--teal-light); transform: translateX(3px);
+    }
+    .opt-btn:focus-visible { outline: 2.5px solid var(--focus); outline-offset: 2px; }
+    .opt-btn:disabled { cursor: default; transform: none; }
+    .opt-letter {
+      flex-shrink: 0; width: 27px; height: 27px; border-radius: 50%;
+      background: var(--sage-light); border: 1.5px solid var(--sage);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 800; color: var(--text-light); transition: all 0.2s;
+    }
+    .opt-btn:hover:not(:disabled) .opt-letter { background: var(--teal-mid); border-color: var(--teal); color: var(--teal-darker); }
+    .opt-btn.correct   { border-color: var(--green-border); background: var(--green-light); color: var(--green-text); }
+    .opt-btn.incorrect { border-color: var(--red-border);   background: var(--red-light);   color: var(--red-text); }
+    .opt-btn.dimmed    { opacity: 0.4; }
+    .opt-btn.correct   .opt-letter { background: var(--green-border); border-color: var(--green-border); color: var(--white); font-size: 13px; }
+    .opt-btn.incorrect .opt-letter { background: var(--red-border);   border-color: var(--red-border);   color: var(--white); font-size: 13px; }
+    .feedback-box {
+      display: none; border-radius: 9px; padding: 12px 15px;
+      font-size: 13px; line-height: 1.6; margin-top: 4px; animation: fadeIn 0.3s ease;
+    }
+    .feedback-box.correct-fb   { display: block; background: var(--green-light); border: 1px solid var(--green-border); color: var(--green-text); }
+    .feedback-box.incorrect-fb { display: block; background: var(--red-light);   border: 1px solid var(--red-border);   color: var(--red-text); }
+    .fb-strong { font-weight: 700; display: block; margin-bottom: 3px; font-size: 13px; }
+    .correct-fb  .fb-strong { color: var(--green-dark); }
+    .incorrect-fb .fb-strong { color: var(--red-dark); }
+    .q-block.hidden { display: none; }
+    .q-block.reveal { animation: fadeIn 0.45s ease; }
+    .continue-hint { display: none; text-align: center; font-size: 12px; color: var(--teal-dark); font-weight: 600; margin-top: 8px; animation: pulse-hint 1.5s ease infinite; }
+    .continue-hint.visible { display: block; }
+    @keyframes pulse-hint { 0%,100%{opacity:1}50%{opacity:0.4} }
+    .q-divider { height: 1px; background: var(--sage-mid); margin: 18px 0; }
+
+    /* ── Score Card ── */
+    .score-card {
+      display: none; background: var(--bg-card);
+      border: 1px solid var(--teal-mid); border-radius: 12px;
+      padding: 28px 24px; text-align: center; animation: fadeIn 0.4s ease;
+      position: relative; overflow: hidden;
+      box-shadow: 0 2px 8px rgba(102,178,178,0.1); margin-top: 8px;
+    }
+    .score-card::before { content:''; position:absolute; top:0;left:0;right:0; height:3px; background:linear-gradient(to right, var(--teal-dark), var(--teal)); }
+    .score-card.visible { display: block; }
+    .score-emoji    { font-size: 44px; margin-bottom: 10px; display: block; }
+    .score-headline { font-size: 18px; font-weight: 800; color: var(--text-dark); margin-bottom: 6px; }
+    .score-sub      { font-size: 13px; color: var(--text-light); line-height: 1.6; max-width: 420px; margin: 0 auto 16px; }
+    .score-pills { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+    .score-pill { padding: 6px 14px; border-radius: 30px; font-size: 11px; font-weight: 700; }
+    .pill-correct  { background: var(--green-light); border: 1.5px solid var(--green-border); color: var(--green-text); }
+    .pill-incorrect{ background: var(--red-light);   border: 1.5px solid var(--red-border);   color: var(--red-text); }
+    .pill-neutral  { background: var(--teal-light);  border: 1.5px solid var(--teal-mid);     color: var(--teal-darker); }
+
+    /* ── Summary ── */
+    .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 24px; }
+    .sum-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+    .sum-header { padding: 11px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
+    .sum-header.hd-teal  { background: var(--teal-light);  border-bottom-color: var(--teal-mid); }
+    .sum-header.hd-amber { background: var(--amber-light); border-bottom-color: rgba(232,160,32,0.3); }
+    .sum-header.hd-green { background: var(--green-light); border-bottom-color: rgba(82,183,136,0.3); }
+    .sum-header.hd-red   { background: var(--red-light);   border-bottom-color: rgba(224,112,112,0.3); }
+    .sum-icon  { font-size: 18px; flex-shrink: 0; }
+    .sum-title { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.09em; }
+    .hd-teal  .sum-title { color: var(--teal-darker); }
+    .hd-amber .sum-title { color: var(--amber-text); }
+    .hd-green .sum-title { color: var(--green-dark); }
+    .hd-red   .sum-title { color: var(--red-dark); }
+    .sum-body { padding: 12px 16px; display: flex; flex-direction: column; gap: 7px; }
+    .sum-item { display: flex; align-items: flex-start; gap: 7px; font-size: 12px; color: var(--text-mid); line-height: 1.4; }
+    .sum-bullet { color: var(--teal-dark); font-weight: 800; flex-shrink: 0; font-size: 11px; margin-top: 1px; }
+    .sum-val   { color: var(--teal-darker); font-weight: 700; }
+    .sum-warn  { color: var(--amber);       font-weight: 700; }
+    .sum-alert { color: var(--red-dark);    font-weight: 700; }
+
+    /* ── Numbers Grid ── */
+    .numbers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+    .num-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 18px 14px 14px; text-align: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04); position: relative;
+      overflow: hidden; display: flex; flex-direction: column; align-items: center;
+    }
+    .num-card::before { content:''; position:absolute; top:0;left:0;right:0; height:3px; }
+    .num-card.nc-teal::before   { background: var(--teal); }
+    .num-card.nc-amber::before  { background: var(--amber-border); }
+    .num-card.nc-red::before    { background: var(--red-border); }
+    .num-card.nc-green::before  { background: var(--green-border); }
+    .num-icon   { font-size: 24px; margin-bottom: 8px; }
+    .num-label  { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); margin-bottom: 6px; }
+    .num-value  { font-size: 18px; font-weight: 800; line-height: 1.1; margin-bottom: 4px; }
+    .num-note   { font-size: 11px; color: var(--text-light); line-height: 1.4; }
+    .nc-teal  .num-value { color: var(--teal-darker); }
+    .nc-amber .num-value { color: var(--amber); }
+    .nc-red   .num-value { color: var(--red-dark); }
+    .nc-green .num-value { color: var(--green-dark); }
+
+    /* ── Progress Bar ── */
+    .progress-wrap { margin-bottom: 20px; }
+    .progress-meta { display: flex; justify-content: space-between; margin-bottom: 6px; }
+    .progress-lbl  { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; color: var(--text-light); }
+    .progress-frac { font-size: 11px; color: var(--text-light); font-weight: 600; }
+    .progress-track { height: 5px; background: var(--sage-mid); border-radius: 3px; overflow: hidden; }
+    .progress-fill  { height: 100%; background: linear-gradient(to right, var(--teal-dark), var(--teal)); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+
+    /* ── Callouts ── */
+    .callout-amber {
+      background: var(--amber-light); border: 1px solid rgba(232,160,32,0.3);
+      border-left: 3px solid var(--amber-border); border-radius: 0 8px 8px 0;
+      padding: 11px 14px; font-size: 13px; color: var(--amber);
+      line-height: 1.55; margin-bottom: 16px;
+    }
+    .callout-amber strong { color: var(--amber-text); }
+    .callout-teal {
+      background: var(--teal-light); border: 1px solid var(--teal-mid);
+      border-left: 3px solid var(--teal); border-radius: 0 8px 8px 0;
+      padding: 11px 14px; font-size: 13px; color: var(--text-mid);
+      line-height: 1.55; margin-bottom: 16px;
+    }
+    .callout-teal strong { color: var(--text-dark); }
+
+    /* ── Btn ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 10px 22px; border-radius: 8px; font-size: 13px;
+      font-weight: 700; cursor: pointer; border: none; font-family: inherit;
+      letter-spacing: 0.03em; transition: all 0.2s;
+    }
+    .btn:focus-visible { outline: 2.5px solid var(--focus); outline-offset: 2px; }
+    .btn-primary { background: var(--teal-dark); color: var(--white); }
+    .btn-primary:hover { background: var(--teal); transform: translateY(-1px); }
+    .btn-secondary { background: var(--sage-light); color: var(--text-mid); border: 1.5px solid var(--sage-mid); }
+    .btn-secondary:hover { background: var(--sage-mid); color: var(--text-dark); }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--teal-light); border-top: 1px solid var(--teal-mid);
+      padding: 28px 24px; text-align: center; font-size: 12px;
+      color: var(--text-light); line-height: 1.7;
+    }
+    footer strong { color: var(--text-dark); }
+    footer a { color: var(--teal-dark); text-decoration: underline; }
+    .footer-disclaimer {
+      background: var(--amber-light); border: 1px solid var(--amber-border);
+      border-radius: 8px; padding: 12px 16px; max-width: 700px;
+      margin: 0 auto 14px; font-size: 12px; color: var(--amber-text);
+      line-height: 1.6; text-align: left;
+    }
+    .footer-disclaimer strong { color: var(--amber-text); font-weight: 800; }
+
+    /* ── Responsive ── */
+    @media (max-width: 700px) {
+      .nav-links      { display: none; }
+      .nav-hamburger  { display: flex; }
+      .flip-grid-2x2  { grid-template-columns: 1fr; }
+      .flip-card      { height: 180px; }
+      .body-map-wrap  { grid-template-columns: 1fr; }
+      .treatment-grid { grid-template-columns: 1fr; }
+      .summary-grid   { grid-template-columns: 1fr; }
+      .numbers-grid   { grid-template-columns: repeat(2,1fr); }
+      .cascade-branch-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 400px) {
+      .numbers-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
@@ -1481,7 +832,6 @@
     <span class="nav-brand-icon" aria-hidden="true">🐾</span>
     Cholecalciferol Toxicology
   </a>
-
   <ul class="nav-links" role="list" aria-label="Page sections">
     <li><a href="#what-is">What Is It</a></li>
     <li><a href="#mechanism">Mechanism</a></li>
@@ -1492,7 +842,6 @@
     <li><a href="#knowledge-check">Quiz</a></li>
     <li><a href="#summary">Summary</a></li>
   </ul>
-
   <button
     class="nav-hamburger"
     aria-label="Toggle navigation menu"
@@ -1505,14 +854,14 @@
 
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobile navigation">
-  <a href="#what-is"       onclick="closeMobileMenu()">What Is It</a>
-  <a href="#mechanism"     onclick="closeMobileMenu()">Mechanism</a>
-  <a href="#clinical-signs"onclick="closeMobileMenu()">Clinical Signs</a>
-  <a href="#diagnosis"     onclick="closeMobileMenu()">Diagnosis</a>
-  <a href="#differential"  onclick="closeMobileMenu()">Differentials</a>
-  <a href="#treatment"     onclick="closeMobileMenu()">Treatment</a>
+  <a href="#what-is"        onclick="closeMobileMenu()">What Is It</a>
+  <a href="#mechanism"      onclick="closeMobileMenu()">Mechanism</a>
+  <a href="#clinical-signs" onclick="closeMobileMenu()">Clinical Signs</a>
+  <a href="#diagnosis"      onclick="closeMobileMenu()">Diagnosis</a>
+  <a href="#differential"   onclick="closeMobileMenu()">Differentials</a>
+  <a href="#treatment"      onclick="closeMobileMenu()">Treatment</a>
   <a href="#knowledge-check"onclick="closeMobileMenu()">Quiz</a>
-  <a href="#summary"       onclick="closeMobileMenu()">Summary</a>
+  <a href="#summary"        onclick="closeMobileMenu()">Summary</a>
 </div>
 
 <div class="page-wrap" id="main-content">
@@ -1522,21 +871,17 @@
 ══════════════════════════════════ -->
 <section id="hero" aria-labelledby="hero-heading">
   <div class="hero-inner">
-
     <div class="hero-tag" role="doc-subtitle">Veterinary Toxicology — Cholecalciferol</div>
-
     <h1 class="hero-title" id="hero-heading">
       Buddy Ingested Something 36 Hours Ago.<br>
       What Is It — and What Do You Do?
     </h1>
-
     <p class="hero-sub">
       A working through of cholecalciferol (Vitamin D3) toxicosis —
       one of the most clinically important small animal poisonings due to
       its delayed onset, multi-system damage, and the narrow window
       for effective intervention.
     </p>
-
     <div class="hero-chips" aria-label="Module overview">
       <div class="hero-chip"><span class="hero-chip-icon" aria-hidden="true">🐕🐈</span>Dogs &amp; Cats</div>
       <div class="hero-chip"><span class="hero-chip-icon" aria-hidden="true">⏱️</span>36–48 hr delayed onset</div>
@@ -1544,7 +889,6 @@
       <div class="hero-chip"><span class="hero-chip-icon" aria-hidden="true">💊</span>Treatment protocol</div>
       <div class="hero-chip"><span class="hero-chip-icon" aria-hidden="true">🧪</span>Differential diagnosis</div>
     </div>
-
     <div class="hero-patient" role="region" aria-label="Patient case file">
       <div class="hero-patient-icon" aria-hidden="true">🐕</div>
       <div>
@@ -1564,11 +908,10 @@
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- Inline disclaimer below hero -->
+<!-- Disclaimer -->
 <div class="disclaimer" role="note" aria-label="Important disclaimer">
   <span class="disclaimer-icon" aria-hidden="true">⚠️</span>
   <span>
@@ -1585,22 +928,17 @@
      SECTION 1 — WHAT IS CHOLECALCIFEROL
 ══════════════════════════════════ -->
 <section id="what-is" class="section" aria-labelledby="whatheading">
-
   <div class="section-tag">Section 1</div>
   <h2 class="section-title" id="whatheading">What is Cholecalciferol?</h2>
   <p class="section-lead">
     Vitamin D3 — essential in small amounts, deadly in overdose.
     Click each card to flip it and reveal key information.
   </p>
-
   <div class="col-label">Explore the Key Facts</div>
 
-  <div
-    class="flip-grid-2x2"
-    role="list"
-    aria-label="Key facts — click each card to flip"
-  >
+  <div class="flip-grid-2x2" role="list" aria-label="Key facts — click each card to flip">
 
+    <!-- Card 1 -->
     <div class="flip-card" role="listitem" tabindex="0"
       aria-label="Rodenticide exposure — click to flip"
       onclick="flipCard(this)"
@@ -1624,6 +962,7 @@
       </div>
     </div>
 
+    <!-- Card 2 -->
     <div class="flip-card" role="listitem" tabindex="0"
       aria-label="Vitamin supplement exposure — click to flip"
       onclick="flipCard(this)"
@@ -1647,6 +986,7 @@
       </div>
     </div>
 
+    <!-- Card 3 -->
     <div class="flip-card" role="listitem" tabindex="0"
       aria-label="Species at risk — click to flip"
       onclick="flipCard(this)"
@@ -1671,6 +1011,7 @@
       </div>
     </div>
 
+    <!-- Card 4 -->
     <div class="flip-card" role="listitem" tabindex="0"
       aria-label="Toxic dose thresholds — click to flip"
       onclick="flipCard(this)"
@@ -1695,10 +1036,9 @@
       </div>
     </div>
 
-  </div>
+  </div><!-- end flip-grid -->
 
   <div class="col-label">Dose–Response Relationship</div>
-
   <div class="dose-card" role="region" aria-label="Dose response visual">
     <div class="dose-bar-track" role="img"
       aria-label="Dose bar: safe below 0.5 mg per kg, toxic 0.5 to 10 mg per kg, lethal above 10 mg per kg">
@@ -1724,14 +1064,12 @@
     Do not wait for confirmed lab results before initiating supportive care
     when exposure history and clinical signs are consistent.
   </div>
-
 </section>
 
 <!-- ══════════════════════════════════
      SECTION 2 — MECHANISM
 ══════════════════════════════════ -->
 <section id="mechanism" class="section" aria-labelledby="mechheading">
-
   <div class="section-tag">Section 2</div>
   <h2 class="section-title" id="mechheading">Mechanism of Toxicity</h2>
   <p class="section-lead">
@@ -1739,10 +1077,10 @@
     regulation system through four simultaneous pathways. Click each node
     to reveal the mechanism.
   </p>
-
   <div class="cascade-flow" role="region" aria-label="Mechanism of toxicity cascade">
 
-    <div class="cascade-node node-start" tabindex="0" onclick="toggleTooltip('tt1')"
+    <div class="cascade-node node-start" tabindex="0"
+      onclick="toggleTooltip('tt1')"
       onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTooltip('tt1')}"
       aria-expanded="false" id="cn1" aria-controls="tt1">
       ⬇ Cholecalciferol ingested — absorbed from GI tract
@@ -1752,9 +1090,11 @@
       systemic circulation. At toxic doses, normal regulatory mechanisms that
       limit vitamin D activity are overwhelmed.
     </div>
+
     <div class="cascade-arrow" aria-hidden="true">↓</div>
 
-    <div class="cascade-node" tabindex="0" onclick="toggleTooltip('tt2')"
+    <div class="cascade-node" tabindex="0"
+      onclick="toggleTooltip('tt2')"
       onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTooltip('tt2')}"
       aria-expanded="false" id="cn2" aria-controls="tt2">
       🔬 Liver → 25-hydroxycholecalciferol &nbsp;|&nbsp; Kidney → <strong>1,25-dihydroxycholecalciferol (calcitriol)</strong>
@@ -1766,9 +1106,11 @@
       calcitriol accumulates massively and drives severe hypercalcemia through
       four concurrent mechanisms.
     </div>
+
     <div class="cascade-arrow" aria-hidden="true">↓</div>
 
-    <div class="cascade-node" tabindex="0" onclick="toggleTooltip('tt3')"
+    <div class="cascade-node" tabindex="0"
+      onclick="toggleTooltip('tt3')"
       onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTooltip('tt3')}"
       aria-expanded="false" id="cn3" aria-controls="tt3">
       📈 Four simultaneous calcium-raising mechanisms — click to expand
@@ -1779,6 +1121,7 @@
       hypercalcemia is so rapid, severe, and difficult to reverse. Treatment
       must also target multiple pathways simultaneously.
     </div>
+
     <div class="cascade-arrow" aria-hidden="true">↓</div>
 
     <div class="cascade-branch-grid" role="list" aria-label="Four pathways">
@@ -1834,7 +1177,8 @@
 
     <div class="cascade-arrow" aria-hidden="true">↓</div>
 
-    <div class="cascade-node node-end" tabindex="0" onclick="toggleTooltip('tt4')"
+    <div class="cascade-node node-end" tabindex="0"
+      onclick="toggleTooltip('tt4')"
       onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTooltip('tt4')}"
       aria-expanded="false" id="cn4" aria-controls="tt4">
       ⚠️ Severe hypercalcemia → Ca × P &gt;70 mg/L → Soft tissue mineralization &amp; organ failure
@@ -1848,14 +1192,12 @@
     </div>
 
   </div>
-
 </section>
 
 <!-- ══════════════════════════════════
      SECTION 3 — CLINICAL SIGNS
 ══════════════════════════════════ -->
 <section id="clinical-signs" class="section" aria-labelledby="signsheading">
-
   <div class="section-tag">Section 3</div>
   <h2 class="section-title" id="signsheading">Clinical Signs</h2>
   <p class="section-lead">
@@ -1864,15 +1206,9 @@
     calcitriol. Click each numbered hotspot to reveal the signs for that region.
   </p>
 
-  <div
-    class="progress-wrap"
-    role="progressbar"
-    aria-valuemin="0"
-    aria-valuemax="5"
-    aria-valuenow="0"
-    aria-label="Clinical signs progress"
-    id="signsProgress"
-  >
+  <div class="progress-wrap"
+    role="progressbar" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0"
+    aria-label="Clinical signs progress" id="signsProgress">
     <div class="progress-meta">
       <span class="progress-lbl">Regions explored</span>
       <span class="progress-frac" id="signsFrac">0 of 5</span>
@@ -1882,7 +1218,6 @@
 
   <div class="body-map-wrap">
     <div class="body-svg-card" role="region" aria-label="Patient body diagram with clickable hotspots">
-
       <svg viewBox="0 0 280 340" fill="none" xmlns="http://www.w3.org/2000/svg"
         style="width:100%;max-width:280px;display:block;margin:0 auto;"
         aria-hidden="true" focusable="false">
@@ -1902,7 +1237,6 @@
         <ellipse cx="155" cy="180" rx="18" ry="14" fill="rgba(224,112,112,0.08)" stroke="rgba(224,112,112,0.2)" stroke-width="1" stroke-dasharray="3,2"/>
         <ellipse cx="135" cy="215" rx="22" ry="12" fill="rgba(232,160,32,0.08)" stroke="rgba(232,160,32,0.2)" stroke-width="1" stroke-dasharray="3,2"/>
       </svg>
-
       <button class="hotspot-btn" style="top:20%;left:73%;"
         onclick="showSign(1,this)" aria-label="Region 1: Neurological and general signs">1</button>
       <button class="hotspot-btn" style="top:47%;left:53%;"
@@ -1913,7 +1247,6 @@
         onclick="showSign(4,this)" aria-label="Region 4: Renal signs">4</button>
       <button class="hotspot-btn" style="top:26%;left:18%;"
         onclick="showSign(5,this)" aria-label="Region 5: Systemic and tissue signs">5</button>
-
       <div class="progress-tracker" id="signsTracker">
         Click numbered hotspots → <strong id="signsCount">0 / 5</strong> discovered
         <div class="progress-bar-thin"><div class="progress-fill-thin" id="signsBarThin" style="width:0%"></div></div>
@@ -1925,7 +1258,6 @@
         <span style="font-size:32px;">👆</span>
         <span>Click a hotspot on the patient to reveal clinical signs for that region.</span>
       </div>
-
       <div class="sign-content" id="sign-1">
         <div class="sign-tag">Neurological / General</div>
         <div class="sign-title">CNS &amp; General Signs</div>
@@ -1934,7 +1266,6 @@
         <div class="sign-item"><span class="sign-bullet">◆</span><span><strong>Depression / obtundation</strong> — reflects hypercalcemia's effect on neuromuscular function</span></div>
         <div class="sign-note">Non-specific signs make early diagnosis challenging without exposure history.</div>
       </div>
-
       <div class="sign-content" id="sign-2">
         <div class="sign-tag">Cardiovascular</div>
         <div class="sign-title">Heart &amp; Circulation</div>
@@ -1943,7 +1274,6 @@
         <div class="sign-item"><span class="sign-bullet">◆</span><span><strong>Hypertension</strong> — from vascular smooth muscle dysfunction</span></div>
         <div class="sign-note">Cardiac mineralization can cause permanent myocardial damage.</div>
       </div>
-
       <div class="sign-content" id="sign-3">
         <div class="sign-tag">Gastrointestinal</div>
         <div class="sign-title">GI Tract Signs</div>
@@ -1952,7 +1282,6 @@
         <div class="sign-item"><span class="sign-bullet">◆</span><span><strong>Melena (dark tarry feces)</strong> — indicates GI ulceration and intestinal bleeding</span></div>
         <div class="sign-note">GI ulceration occurs secondary to hypercalcemia and requires specific treatment.</div>
       </div>
-
       <div class="sign-content" id="sign-4">
         <div class="sign-tag">Renal</div>
         <div class="sign-title">Kidney &amp; Urinary Signs</div>
@@ -1962,7 +1291,6 @@
         <div class="sign-item"><span class="sign-bullet">◆</span><span><strong>Low urine specific gravity</strong> — isosthenuria from tubular damage</span></div>
         <div class="sign-note">Hypercalcemia causes nephrogenic diabetes insipidus-like syndrome and direct tubular injury.</div>
       </div>
-
       <div class="sign-content" id="sign-5">
         <div class="sign-tag">Systemic / Tissues</div>
         <div class="sign-title">Soft Tissue Mineralization</div>
@@ -1980,14 +1308,12 @@
     two-step metabolic activation of cholecalciferol to calcitriol, and the subsequent
     calcium accumulation to pathological levels.
   </div>
-
 </section>
 
 <!-- ══════════════════════════════════
      SECTION 4 — DIAGNOSIS
 ══════════════════════════════════ -->
 <section id="diagnosis" class="section" aria-labelledby="diagheading">
-
   <div class="section-tag">Section 4</div>
   <h2 class="section-title" id="diagheading">Diagnosing Cholecalciferol Toxicity</h2>
   <p class="section-lead">
@@ -2086,11 +1412,9 @@
       confirm the diagnosis definitively. Not always immediately available —
       clinical diagnosis and treatment must not be delayed pending this result.
     </div>
-
   </div>
 
   <div class="col-label">Diagnostic Sequence</div>
-
   <div class="seq-row" role="region" aria-label="Diagnostic sequence">
     <div class="seq-step" style="border-color:rgba(232,160,32,0.4);">
       <div class="seq-num">1️⃣</div>
@@ -2110,14 +1434,12 @@
       <div class="seq-val">Mineralization threshold</div>
     </div>
   </div>
-
 </section>
 
 <!-- ══════════════════════════════════
      SECTION 5 — DIFFERENTIAL DIAGNOSIS
 ══════════════════════════════════ -->
 <section id="differential" class="section" aria-labelledby="ddxheading">
-
   <div class="section-tag">Section 5</div>
   <h2 class="section-title" id="ddxheading">Differential Diagnosis</h2>
   <p class="section-lead">
@@ -2126,12 +1448,10 @@
   </p>
 
   <div class="col-label">Cholecalciferol vs. Ethylene Glycol — Kidney Tissue</div>
-
   <button class="reveal-prompt" id="egRevealBtn" onclick="revealEG()"
     aria-label="Click to reveal ethylene glycol comparison values">
     👁 Click to reveal Ethylene Glycol comparison values
   </button>
-
   <div class="compare-wrap" role="region" aria-label="Comparison table">
     <table class="compare-table" aria-label="Cholecalciferol versus Ethylene Glycol comparison">
       <thead>
@@ -2157,7 +1477,6 @@
   </div>
 
   <div class="col-label">Other Differentials — Click to Expand</div>
-
   <div class="ddx-list" role="list">
 
     <div class="ddx-item" role="listitem" id="ddx1">
@@ -2232,14 +1551,12 @@
     </div>
 
   </div>
-
 </section>
 
 <!-- ══════════════════════════════════
      SECTION 6 — TREATMENT
 ══════════════════════════════════ -->
 <section id="treatment" class="section" aria-labelledby="txheading">
-
   <div class="section-tag">Section 6</div>
   <h2 class="section-title" id="txheading">Treating Cholecalciferol Toxicity</h2>
   <p class="section-lead">
@@ -2447,10 +1764,9 @@
       </div>
     </div>
 
-  </div>
+  </div><!-- end treatment-grid -->
 
   <div class="col-label">Serial Monitoring — Parameters &amp; Goals</div>
-
   <div class="monitor-table-wrap" role="region" aria-label="Monitoring parameters">
     <table class="monitor-table" aria-label="Monitoring parameters, frequency, and goals">
       <thead>
@@ -2478,14 +1794,12 @@
     prematurely. Plan for a minimum of <strong>4–6 weeks</strong> of continued
     management post-discharge.
   </div>
-
 </section>
 
 <!-- ══════════════════════════════════
      SECTION 7 — KNOWLEDGE CHECK
 ══════════════════════════════════ -->
 <section id="knowledge-check" class="section" aria-labelledby="quizheading">
-
   <div class="section-tag">Section 7 — Knowledge Check</div>
   <h2 class="section-title" id="quizheading">Test Your Understanding</h2>
   <p class="section-lead">
@@ -2512,15 +1826,14 @@
       </p>
     </div>
     <ul class="options-list" role="list" aria-label="Answer options for question 1">
-      <li><button class="opt-btn" id="q1a" onclick="qa(1,'A',false)" aria-label="Option A: Within 2 to 4 hours"><span class="opt-letter" aria-hidden="true">A</span>Within 2–4 hours — by 11:00 AM Monday</button></li>
-      <li><button class="opt-btn" id="q1b" onclick="qa(1,'B',false)" aria-label="Option B: Within 8 to 12 hours"><span class="opt-letter" aria-hidden="true">B</span>Within 8–12 hours — by 7:00 PM Monday</button></li>
-      <li><button class="opt-btn" id="q1c" onclick="qa(1,'C',true)"  aria-label="Option C: 36 to 48 hours later"><span class="opt-letter" aria-hidden="true">C</span>36–48 hours later — Tuesday evening or Wednesday morning</button></li>
-      <li><button class="opt-btn" id="q1d" onclick="qa(1,'D',false)" aria-label="Option D: 5 to 7 days later"><span class="opt-letter" aria-hidden="true">D</span>5–7 days later — the following weekend</button></li>
+      <li><button class="opt-btn" id="q1a" onclick="qa(1,'A',false)" aria-label="Option A"><span class="opt-letter" aria-hidden="true">A</span>Within 2–4 hours — by 11:00 AM Monday</button></li>
+      <li><button class="opt-btn" id="q1b" onclick="qa(1,'B',false)" aria-label="Option B"><span class="opt-letter" aria-hidden="true">B</span>Within 8–12 hours — by 7:00 PM Monday</button></li>
+      <li><button class="opt-btn" id="q1c" onclick="qa(1,'C',true)"  aria-label="Option C"><span class="opt-letter" aria-hidden="true">C</span>36–48 hours later — Tuesday evening or Wednesday morning</button></li>
+      <li><button class="opt-btn" id="q1d" onclick="qa(1,'D',false)" aria-label="Option D"><span class="opt-letter" aria-hidden="true">D</span>5–7 days later — the following weekend</button></li>
     </ul>
     <div class="feedback-box" id="fb1" role="alert" aria-live="polite"></div>
     <div class="continue-hint" id="hint1" aria-live="polite">↓ Scroll down for Question 2</div>
   </div>
-
   <div class="q-divider" id="qd1" style="display:none;" aria-hidden="true"></div>
 
   <!-- Q2 -->
@@ -2532,15 +1845,14 @@
       </p>
     </div>
     <ul class="options-list" role="list" aria-label="Answer options for question 2">
-      <li><button class="opt-btn" id="q2a" onclick="qa(2,'A',false)" aria-label="Option A: Induce emesis and activated charcoal"><span class="opt-letter" aria-hidden="true">A</span>Induce emesis and administer activated charcoal</button></li>
-      <li><button class="opt-btn" id="q2b" onclick="qa(2,'B',true)"  aria-label="Option B: IV normal saline plus furosemide"><span class="opt-letter" aria-hidden="true">B</span>IV normal saline diuresis + furosemide to promote renal calcium excretion</button></li>
-      <li><button class="opt-btn" id="q2c" onclick="qa(2,'C',false)" aria-label="Option C: Administer calcitonin"><span class="opt-letter" aria-hidden="true">C</span>Administer calcitonin (4–6 IU/kg SQ) every 2–3 hours as primary treatment</button></li>
-      <li><button class="opt-btn" id="q2d" onclick="qa(2,'D',false)" aria-label="Option D: Start dietary restriction and discharge"><span class="opt-letter" aria-hidden="true">D</span>Start dietary calcium restriction and discharge with outpatient monitoring</button></li>
+      <li><button class="opt-btn" id="q2a" onclick="qa(2,'A',false)" aria-label="Option A"><span class="opt-letter" aria-hidden="true">A</span>Induce emesis and administer activated charcoal</button></li>
+      <li><button class="opt-btn" id="q2b" onclick="qa(2,'B',true)"  aria-label="Option B"><span class="opt-letter" aria-hidden="true">B</span>IV normal saline diuresis + furosemide to promote renal calcium excretion</button></li>
+      <li><button class="opt-btn" id="q2c" onclick="qa(2,'C',false)" aria-label="Option C"><span class="opt-letter" aria-hidden="true">C</span>Administer calcitonin (4–6 IU/kg SQ) every 2–3 hours as primary treatment</button></li>
+      <li><button class="opt-btn" id="q2d" onclick="qa(2,'D',false)" aria-label="Option D"><span class="opt-letter" aria-hidden="true">D</span>Start dietary calcium restriction and discharge with outpatient monitoring</button></li>
     </ul>
     <div class="feedback-box" id="fb2" role="alert" aria-live="polite"></div>
     <div class="continue-hint" id="hint2" aria-live="polite">↓ Scroll down for Question 3</div>
   </div>
-
   <div class="q-divider" id="qd2" style="display:none;" aria-hidden="true"></div>
 
   <!-- Q3 -->
@@ -2553,10 +1865,10 @@
       </p>
     </div>
     <ul class="options-list" role="list" aria-label="Answer options for question 3">
-      <li><button class="opt-btn" id="q3a" onclick="qa(3,'A',false)" aria-label="Option A: Elevated creatinine"><span class="opt-letter" aria-hidden="true">A</span>Elevated serum creatinine indicating kidney failure</button></li>
-      <li><button class="opt-btn" id="q3b" onclick="qa(3,'B',false)" aria-label="Option B: Suppressed PTH"><span class="opt-letter" aria-hidden="true">B</span>Suppressed PTH in the context of hypercalcemia</button></li>
-      <li><button class="opt-btn" id="q3c" onclick="qa(3,'C',true)"  aria-label="Option C: Kidney Ca:P ratio 0.4 to 0.7"><span class="opt-letter" aria-hidden="true">C</span>Kidney Ca:P ratio of 0.4–0.7 (vs. &gt;2.5 with ethylene glycol)</button></li>
-      <li><button class="opt-btn" id="q3d" onclick="qa(3,'D',false)" aria-label="Option D: Polyuria and polydipsia"><span class="opt-letter" aria-hidden="true">D</span>Polyuria and polydipsia with low urine specific gravity</button></li>
+      <li><button class="opt-btn" id="q3a" onclick="qa(3,'A',false)" aria-label="Option A"><span class="opt-letter" aria-hidden="true">A</span>Elevated serum creatinine indicating kidney failure</button></li>
+      <li><button class="opt-btn" id="q3b" onclick="qa(3,'B',false)" aria-label="Option B"><span class="opt-letter" aria-hidden="true">B</span>Suppressed PTH in the context of hypercalcemia</button></li>
+      <li><button class="opt-btn" id="q3c" onclick="qa(3,'C',true)"  aria-label="Option C"><span class="opt-letter" aria-hidden="true">C</span>Kidney Ca:P ratio of 0.4–0.7 (vs. &gt;2.5 with ethylene glycol)</button></li>
+      <li><button class="opt-btn" id="q3d" onclick="qa(3,'D',false)" aria-label="Option D"><span class="opt-letter" aria-hidden="true">D</span>Polyuria and polydipsia with low urine specific gravity</button></li>
     </ul>
     <div class="feedback-box" id="fb3" role="alert" aria-live="polite"></div>
   </div>
@@ -2569,24 +1881,20 @@
     <div class="score-pills" id="scorePills" aria-label="Score breakdown"></div>
     <button class="btn btn-primary" onclick="resetQuiz()" aria-label="Retry the quiz">↩ Try Again</button>
   </div>
-
 </section>
 
 <!-- ══════════════════════════════════
      SECTION 8 — SUMMARY
 ══════════════════════════════════ -->
 <section id="summary" class="section" aria-labelledby="sumheading">
-
   <div class="section-tag">Section 8 — Summary Reference</div>
   <h2 class="section-title" id="sumheading">Cholecalciferol Toxicology — Quick Reference</h2>
   <p class="section-lead">
-    A complete clinical reference. Use this to consolidate and review
-    everything covered in this module.
+    A complete clinical reference. Use this to consolidate and review everything covered in this module.
   </p>
 
   <div class="col-label">Critical Numbers to Remember</div>
-
-  <div class="numbers-grid" role="list" aria-label="Critical clinical numbers — 3 columns, 2 rows">
+  <div class="numbers-grid" role="list" aria-label="Critical clinical numbers">
     <div class="num-card nc-amber" role="listitem"><span class="num-icon" aria-hidden="true">⚠️</span><div class="num-label">Toxic Threshold</div><div class="num-value">&gt;0.5 mg/kg</div><div class="num-note">Minimum dose causing toxicosis</div></div>
     <div class="num-card nc-red"   role="listitem"><span class="num-icon" aria-hidden="true">💀</span><div class="num-label">Lethal Dose</div><div class="num-value">10–15 mg/kg</div><div class="num-note">Approximate lethal range in dogs and cats</div></div>
     <div class="num-card nc-teal"  role="listitem"><span class="num-icon" aria-hidden="true">⏱️</span><div class="num-label">Sign Onset</div><div class="num-value">36–48 hrs</div><div class="num-note">Delayed — metabolic activation of calcitriol</div></div>
@@ -2596,9 +1904,7 @@
   </div>
 
   <div class="col-label">Clinical Summary — Four Key Areas</div>
-
   <div class="summary-grid" role="region" aria-label="Clinical summary by category">
-
     <div class="sum-card">
       <div class="sum-header hd-teal"><span class="sum-icon" aria-hidden="true">🔬</span><span class="sum-title">Mechanism</span></div>
       <div class="sum-body">
@@ -2611,7 +1917,6 @@
         <div class="sum-item"><span class="sum-bullet">→</span><span>Mineralization when <span class="sum-warn">Ca × P &gt;70 mg/L</span></span></div>
       </div>
     </div>
-
     <div class="sum-card">
       <div class="sum-header hd-amber"><span class="sum-icon" aria-hidden="true">🩺</span><span class="sum-title">Clinical Signs (36–48h)</span></div>
       <div class="sum-body">
@@ -2623,7 +1928,6 @@
         <div class="sum-item"><span class="sum-bullet">•</span><span>Organs: heart, pancreas, kidney, lung, stomach</span></div>
       </div>
     </div>
-
     <div class="sum-card">
       <div class="sum-header hd-green"><span class="sum-icon" aria-hidden="true">🧪</span><span class="sum-title">Diagnosis</span></div>
       <div class="sum-body">
@@ -2636,7 +1940,6 @@
         <div class="sum-item"><span class="sum-bullet">▸</span><span>Kidney Ca:P: <span class="sum-val">0.4–0.7</span> (vs. EG &gt;2.5)</span></div>
       </div>
     </div>
-
     <div class="sum-card">
       <div class="sum-header hd-red"><span class="sum-icon" aria-hidden="true">💊</span><span class="sum-title">Treatment</span></div>
       <div class="sum-body">
@@ -2649,7 +1952,6 @@
         <div class="sum-item"><span class="sum-bullet">⑦</span><span>Low Ca/P diet + serial monitoring</span></div>
       </div>
     </div>
-
   </div>
 
   <div class="callout-teal" role="note">
@@ -2659,14 +1961,12 @@
     or vitamin D3 supplements. Aggressive, multi-modal treatment sustained over weeks
     is required for full recovery.
   </div>
-
 </section>
 
 <!-- ══════════════════════════════════
      FOOTER
 ══════════════════════════════════ -->
 <footer role="contentinfo">
-
   <div class="footer-disclaimer" role="note" aria-label="Educational disclaimer">
     <strong>⚠ Educational Disclaimer:</strong>
     This module is a supplemental learning resource for veterinary medicine students.
@@ -2679,14 +1979,12 @@
     on this page, please contact your faculty directly.</strong>
     Do not rely solely on this resource for examination preparation or clinical decisions.
   </div>
-
   <strong>Cholecalciferol Toxicology</strong> — Veterinary Medicine Educational Module<br>
   College of Veterinary Medicine<br><br>
   <span style="color:var(--sage-dark);">
     Content is for educational purposes only.
     Always verify clinical information with current veterinary references and faculty guidance.
   </span>
-
 </footer>
 
 </div><!-- end page-wrap -->
@@ -2695,31 +1993,38 @@
      JAVASCRIPT
 ══════════════════════════════════ -->
 <script>
-
   /* ── Nav ── */
   function toggleMenu(btn) {
     const menu = document.getElementById('mobileMenu');
     const open = menu.classList.toggle('open');
     btn.setAttribute('aria-expanded', open);
   }
-
   function closeMobileMenu() {
     document.getElementById('mobileMenu').classList.remove('open');
-    document.querySelector('.nav-hamburger').setAttribute('aria-expanded','false');
+    document.querySelector('.nav-hamburger').setAttribute('aria-expanded', 'false');
   }
 
   /* ── Flip Cards ── */
   function flipCard(card) {
     card.classList.toggle('flipped');
+    const flipped = card.classList.contains('flipped');
+    card.setAttribute('aria-label',
+      card.getAttribute('aria-label').replace(
+        flipped ? 'click to flip' : 'click to flip back',
+        flipped ? 'click to flip back' : 'click to flip'
+      )
+    );
   }
 
   /* ── Cascade Tooltips ── */
   function toggleTooltip(id) {
-    const el  = document.getElementById(id);
+    const el   = document.getElementById(id);
     const open = el.classList.toggle('open');
-    /* find parent node for aria */
-    const node = el.previousElementSibling;
-    if (node) node.setAttribute('aria-expanded', open);
+    /* update aria-expanded on the sibling node that controls this tooltip */
+    const prev = el.previousElementSibling;
+    if (prev && prev.hasAttribute('aria-expanded')) {
+      prev.setAttribute('aria-expanded', open);
+    }
   }
 
   /* ── Body Map Hotspots ── */
@@ -2730,50 +2035,50 @@
       signsVisited.add(n);
       btn.classList.add('visited');
       const count = signsVisited.size;
-      document.getElementById('signsCount').textContent = `${count} / 5`;
-      document.getElementById('signsFill').style.width  = `${count/5*100}%`;
-      document.getElementById('signsFrac').textContent  = `${count} of 5`;
+      document.getElementById('signsCount').textContent    = count + ' / 5';
+      document.getElementById('signsFill').style.width     = (count / 5 * 100) + '%';
+      document.getElementById('signsFrac').textContent     = count + ' of 5';
       document.getElementById('signsProgress').setAttribute('aria-valuenow', count);
-      document.getElementById('signsBarThin').style.width = `${count/5*100}%`;
+      document.getElementById('signsBarThin').style.width  = (count / 5 * 100) + '%';
       if (count === 5) {
         document.getElementById('allSignsCallout').style.display = 'block';
       }
     }
-    document.querySelectorAll('.sign-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.sign-content').forEach(function(el) {
+      el.classList.remove('active');
+    });
     document.getElementById('signPlaceholder').style.display = 'none';
-    document.getElementById(`sign-${n}`).classList.add('active');
+    document.getElementById('sign-' + n).classList.add('active');
   }
 
   /* ── Lab Rows ── */
   function toggleLab(n) {
-    const el  = document.getElementById(`le${n}`);
-    const row = document.getElementById(`lr${n}`);
+    const el  = document.getElementById('le' + n);
+    const row = document.getElementById('lr' + n);
     const open = el.classList.toggle('open');
     row.setAttribute('aria-expanded', open);
   }
-
   function keyLab(e, n) {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleLab(n); }
   }
 
   /* ── DDX Accordion ── */
   function toggleDDX(n) {
-    const item = document.getElementById(`ddx${n}`);
-    const btn  = document.getElementById(`ddxt${n}`);
+    const item = document.getElementById('ddx' + n);
+    const btn  = document.getElementById('ddxt' + n);
     const open = item.classList.toggle('open');
     btn.setAttribute('aria-expanded', open);
   }
 
   /* ── EG Reveal ── */
-  let egDone = false;
-
+  var egDone = false;
   function revealEG() {
     if (egDone) return;
     egDone = true;
-    [1,2,3,4,5].forEach(i => {
-      document.getElementById(`eg${i}`).classList.add('revealed');
+    [1, 2, 3, 4, 5].forEach(function(i) {
+      document.getElementById('eg' + i).classList.add('revealed');
     });
-    const th = document.getElementById('egTh');
+    var th = document.getElementById('egTh');
     th.textContent = 'Ethylene Glycol';
     th.removeAttribute('onclick');
     th.style.cursor = 'default';
@@ -2787,21 +2092,20 @@
   }
 
   /* ── Quiz ── */
-  const qState = { answered:{}, correct:{}, total:0 };
-  const qCorrect = { 1:'C', 2:'B', 3:'C' };
-
-  const qFeedback = {
+  var qState = { answered: {}, correct: {}, total: 0 };
+  var qCorrect = { 1: 'C', 2: 'B', 3: 'C' };
+  var qFeedback = {
     1: {
-      correct: { h:'✓ Correct!', b:'The 36–48 hour delay reflects the time required for two-step metabolic activation of cholecalciferol — first in the liver to 25-hydroxycholecalciferol, then in the kidney to active <strong>calcitriol</strong>. Only once calcitriol accumulates to pathological levels does hypercalcemia and clinical signs emerge. This delay is a defining clinical feature of this toxicosis.' },
-      incorrect: { h:'✗ Not quite.', b:'The correct answer is <strong>C — 36–48 hours</strong>. Cholecalciferol requires two-step metabolic activation before it can drive hypercalcemia. This hepatic and renal conversion takes 36–48 hours. A dog may appear clinically normal at initial presentation after ingestion, which is why exposure history is the critical diagnostic clue in the early window.' }
+      correct:   { h: '✓ Correct!',   b: 'The 36–48 hour delay reflects the time required for two-step metabolic activation of cholecalciferol — first in the liver to 25-hydroxycholecalciferol, then in the kidney to active <strong>calcitriol</strong>. Only once calcitriol accumulates to pathological levels does hypercalcemia and clinical signs emerge. This delay is a defining clinical feature of this toxicosis.' },
+      incorrect: { h: '✗ Not quite.', b: 'The correct answer is <strong>C — 36–48 hours</strong>. Cholecalciferol requires two-step metabolic activation before it can drive hypercalcemia. This hepatic and renal conversion takes 36–48 hours. A dog may appear clinically normal at initial presentation after ingestion, which is why exposure history is the critical diagnostic clue in the early window.' }
     },
     2: {
-      correct: { h:'✓ Correct!', b:'At 40 hours, the GI decontamination window is firmly closed. IV normal saline expands extracellular volume and promotes renal calcium excretion through increased GFR and reduced tubular reabsorption. Furosemide works synergistically. Calcitonin has been largely replaced by the more effective pamidronate. Dietary restriction alone is insufficient for acute severe hypercalcemia with a Ca × P of 138 mg/L.' },
-      incorrect: { h:'✗ Not quite.', b:'The correct answer is <strong>B — IV normal saline + furosemide</strong>. GI decontamination is not appropriate at 40 hours post-ingestion (window is 6–8 hours). Calcitonin has been replaced by pamidronate as the preferred bisphosphonate agent. Dietary restriction and discharge is dangerously inadequate for a patient with Ca × P of 138 mg/L and active AKI. Immediate IV diuresis is the priority.' }
+      correct:   { h: '✓ Correct!',   b: 'At 40 hours, the GI decontamination window is firmly closed. IV normal saline expands extracellular volume and promotes renal calcium excretion through increased GFR and reduced tubular reabsorption. Furosemide works synergistically. Calcitonin has been largely replaced by the more effective pamidronate. Dietary restriction alone is insufficient for acute severe hypercalcemia with a Ca × P of 138 mg/L.' },
+      incorrect: { h: '✗ Not quite.', b: 'The correct answer is <strong>B — IV normal saline + furosemide</strong>. GI decontamination is not appropriate at 40 hours post-ingestion (window is 6–8 hours). Calcitonin has been replaced by pamidronate as the preferred bisphosphonate agent. Dietary restriction and discharge is dangerously inadequate for a patient with Ca × P of 138 mg/L and active AKI. Immediate IV diuresis is the priority.' }
     },
     3: {
-      correct: { h:'✓ Correct!', b:'Kidney Ca:P ratio is the most specific tissue-based differentiator: <strong>0.4–0.7 in cholecalciferol</strong> versus <strong>&gt;2.5 in ethylene glycol</strong>. Normal kidney Ca:P is 0.1. Creatinine elevation and PU/PD occur in both toxicoses and are non-differentiating. Suppressed PTH helps with the broader hypercalcemia differential but is not the tissue-specific differentiator between these two toxicoses.' },
-      incorrect: { h:'✗ Not quite.', b:'The correct answer is <strong>C — kidney Ca:P ratio 0.4–0.7</strong>. Creatinine elevation and PU/PD both occur in cholecalciferol and ethylene glycol toxicosis — they do not differentiate. Suppressed PTH helps with the broader hypercalcemia differential. The definitive tissue-level differentiator is the kidney Ca:P ratio: <strong>0.4–0.7 = cholecalciferol; &gt;2.5 = ethylene glycol</strong>. Normal is 0.1.' }
+      correct:   { h: '✓ Correct!',   b: 'Kidney Ca:P ratio is the most specific tissue-based differentiator: <strong>0.4–0.7 in cholecalciferol</strong> versus <strong>&gt;2.5 in ethylene glycol</strong>. Normal kidney Ca:P is 0.1. Creatinine elevation and PU/PD occur in both toxicoses and are non-differentiating. Suppressed PTH helps with the broader hypercalcemia differential but is not the tissue-specific differentiator between these two toxicoses.' },
+      incorrect: { h: '✗ Not quite.', b: 'The correct answer is <strong>C — kidney Ca:P ratio 0.4–0.7</strong>. Creatinine elevation and PU/PD both occur in cholecalciferol and ethylene glycol toxicosis — they do not differentiate. Suppressed PTH helps with the broader hypercalcemia differential. The definitive tissue-level differentiator is the kidney Ca:P ratio: <strong>0.4–0.7 = cholecalciferol; &gt;2.5 = ethylene glycol</strong>. Normal is 0.1.' }
     }
   };
 
@@ -2811,11 +2115,11 @@
     qState.correct[qNum]  = isCorrect;
     qState.total++;
 
-    ['a','b','c','d'].forEach(l => {
-      const btn = document.getElementById(`q${qNum}${l}`);
+    ['a', 'b', 'c', 'd'].forEach(function(l) {
+      var btn = document.getElementById('q' + qNum + l);
       if (!btn) return;
       btn.disabled = true;
-      const lUp = l.toUpperCase();
+      var lUp = l.toUpperCase();
       if (lUp === letter && isCorrect) {
         btn.classList.add('correct');
         btn.querySelector('.opt-letter').textContent = '✓';
@@ -2830,96 +2134,94 @@
       }
     });
 
-    const fb   = document.getElementById(`fb${qNum}`);
-    const data = isCorrect ? qFeedback[qNum].correct : qFeedback[qNum].incorrect;
-    fb.innerHTML = `<strong class="fb-strong">${data.h}</strong>${data.b}`;
-    fb.className = 'feedback-box ' + (isCorrect ? 'correct-fb' : 'incorrect-fb');
+    var fb   = document.getElementById('fb' + qNum);
+    var data = isCorrect ? qFeedback[qNum].correct : qFeedback[qNum].incorrect;
+    fb.innerHTML  = '<strong class="fb-strong">' + data.h + '</strong>' + data.b;
+    fb.className  = 'feedback-box ' + (isCorrect ? 'correct-fb' : 'incorrect-fb');
 
-    /* progress */
-    const pct = (qState.total / 3) * 100;
-    document.getElementById('quizFill').style.width = pct + '%';
-    document.getElementById('quizFrac').textContent = `${qState.total} of 3 answered`;
+    /* progress bar */
+    var pct = (qState.total / 3) * 100;
+    document.getElementById('quizFill').style.width   = pct + '%';
+    document.getElementById('quizFrac').textContent   = qState.total + ' of 3 answered';
     document.getElementById('quizProgress').setAttribute('aria-valuenow', qState.total);
 
-    const next = qNum + 1;
+    var next = qNum + 1;
     if (next <= 3) {
-      const hint = document.getElementById(`hint${qNum}`);
+      var hint = document.getElementById('hint' + qNum);
       hint.classList.add('visible');
-      setTimeout(() => {
-        document.getElementById(`qd${qNum}`).style.display = 'block';
-        const nb = document.getElementById(`qb${next}`);
+      setTimeout(function() {
+        var qd = document.getElementById('qd' + qNum);
+        if (qd) qd.style.display = 'block';
+        var nb = document.getElementById('qb' + next);
         nb.classList.remove('hidden');
         nb.classList.add('reveal');
         hint.classList.remove('visible');
-        nb.scrollIntoView({ behavior:'smooth', block:'start' });
-        setTimeout(() => {
-          const f = document.getElementById(`q${next}a`);
+        nb.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setTimeout(function() {
+          var f = document.getElementById('q' + next + 'a');
           if (f) f.focus();
         }, 600);
       }, 1400);
     }
-
     if (qState.total === 3) setTimeout(showQuizScore, 1400);
   }
 
   function showQuizScore() {
-    const n = [1,2,3].filter(i => qState.correct[i]).length;
-    const data = n === 3
-      ? { e:'🎯', h:'All three correct!', s:'Excellent. You can identify the diagnosis, choose the correct first-line treatment, and apply the kidney Ca:P ratio to differentiate cholecalciferol from ethylene glycol toxicosis.' }
+    var n = [1, 2, 3].filter(function(i) { return qState.correct[i]; }).length;
+    var data = n === 3
+      ? { e: '🎯', h: 'All three correct!',        s: 'Excellent. You can identify the diagnosis, choose the correct first-line treatment, and apply the kidney Ca:P ratio to differentiate cholecalciferol from ethylene glycol toxicosis.' }
       : n === 2
-      ? { e:'✅', h:'Two of three correct.', s:'Strong performance. Review the feedback for the question you missed — each reflects a key clinical decision point.' }
+      ? { e: '✅', h: 'Two of three correct.',      s: 'Strong performance. Review the feedback for the question you missed — each reflects a key clinical decision point.' }
       : n === 1
-      ? { e:'📖', h:'One of three correct.', s:'There is ground to revisit. Review the feedback for each missed question, focusing on the 36–48h delay, treatment priority, and the kidney Ca:P ratio.' }
-      : { e:'🔁', h:'Review the module and try again.', s:'Use the feedback from each question as your guide and revisit the relevant sections above.' };
+      ? { e: '📖', h: 'One of three correct.',      s: 'There is ground to revisit. Review the feedback for each missed question, focusing on the 36–48h delay, treatment priority, and the kidney Ca:P ratio.' }
+      : { e: '🔁', h: 'Review the module and try again.', s: 'Use the feedback from each question as your guide and revisit the relevant sections above.' };
 
     document.getElementById('scoreEmoji').textContent    = data.e;
     document.getElementById('scoreHeadline').textContent = data.h;
     document.getElementById('scoreSub').textContent      = data.s;
 
-    let pills = `<span class="score-pill pill-neutral">Score: ${n} / 3</span>`;
-    [1,2,3].forEach(i => {
-      pills += `<span class="score-pill ${qState.correct[i]?'pill-correct':'pill-incorrect'}">Q${i}: ${qState.correct[i]?'✓ Correct':'✗ Incorrect'}</span>`;
+    var pills = '<span class="score-pill pill-neutral">Score: ' + n + ' / 3</span>';
+    [1, 2, 3].forEach(function(i) {
+      pills += '<span class="score-pill ' + (qState.correct[i] ? 'pill-correct' : 'pill-incorrect') + '">Q' + i + ': ' + (qState.correct[i] ? '✓ Correct' : '✗ Incorrect') + '</span>';
     });
     document.getElementById('scorePills').innerHTML = pills;
 
-    const card = document.getElementById('quizScore');
+    var card = document.getElementById('quizScore');
     card.classList.add('visible');
-    card.scrollIntoView({ behavior:'smooth', block:'start' });
+    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   function resetQuiz() {
     qState.answered = {}; qState.correct = {}; qState.total = 0;
-
-    [1,2,3].forEach(qNum => {
-      ['a','b','c','d'].forEach(l => {
-        const btn = document.getElementById(`q${qNum}${l}`);
+    [1, 2, 3].forEach(function(qNum) {
+      ['a', 'b', 'c', 'd'].forEach(function(l) {
+        var btn = document.getElementById('q' + qNum + l);
         if (!btn) return;
         btn.disabled = false;
-        btn.classList.remove('correct','incorrect','dimmed');
+        btn.classList.remove('correct', 'incorrect', 'dimmed');
         btn.querySelector('.opt-letter').textContent = l.toUpperCase();
       });
-      const fb = document.getElementById(`fb${qNum}`);
+      var fb = document.getElementById('fb' + qNum);
       fb.className = 'feedback-box'; fb.innerHTML = '';
-      const hint = document.getElementById(`hint${qNum}`);
+      var hint = document.getElementById('hint' + qNum);
       if (hint) hint.classList.remove('visible');
     });
-
-    for (let i = 2; i <= 3; i++) {
-      const b = document.getElementById(`qb${i}`);
+    for (var i = 2; i <= 3; i++) {
+      var b = document.getElementById('qb' + i);
       b.classList.add('hidden'); b.classList.remove('reveal');
-      const d = document.getElementById(`qd${i-1}`);
+      var d = document.getElementById('qd' + (i - 1));
       if (d) d.style.display = 'none';
     }
-
-    document.getElementById('quizFill').style.width = '0%';
-    document.getElementById('quizFrac').textContent = '0 of 3 answered';
+    document.getElementById('quizFill').style.width    = '0%';
+    document.getElementById('quizFrac').textContent    = '0 of 3 answered';
     document.getElementById('quizProgress').setAttribute('aria-valuenow', 0);
     document.getElementById('quizScore').classList.remove('visible');
-
-    window.scrollTo({ top: document.getElementById('knowledge-check').offsetTop - 70, behavior:'smooth' });
-    setTimeout(() => { const f = document.getElementById('q1a'); if (f) f.focus(); }, 400);
+    window.scrollTo({ top: document.getElementById('knowledge-check').offsetTop - 70, behavior: 'smooth' });
+    setTimeout(function() {
+      var f = document.getElementById('q1a');
+      if (f) f.focus();
+    }, 400);
   }
-
 </script>
 
 </body>
